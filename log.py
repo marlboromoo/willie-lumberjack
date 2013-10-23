@@ -46,11 +46,11 @@ def setup(bot):
     try:
         host=bot.config.log.redis_host
         port=int(bot.config.log.redis_port)
-        dbid=int(bot.config.log.redis_db)
+        dbid=int(bot.config.log.redis_dbid)
     except Exception, e:
         print "%s: Configure the module first!" % (MODULE)
     #. init the DB
-    if all([host, port, dbid]):
+    if all([host, port, str(dbid)]):
         pool = redis.ConnectionPool(host=host, port=port, db=dbid)
         db = redis.Redis(connection_pool=pool)
         try:
