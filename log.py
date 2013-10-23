@@ -24,14 +24,14 @@ def configure(config):
     | ----- | ------- | ------- |
     | redis_host | localhost | Redis host |
     | redis_port | 6379 | Redis port |
-    | redis_db | log | Redis dbid |
+    | redis_dbid | 0 | Redis dbid |
 
     """
     if config.option('Configure log', False):
         config.interactive_add('log', 'redis_host',
                                'Redis host', 'localhost')
         config.interactive_add('log', 'redis_port', 'Redis port', 6379)
-        config.interactive_add('log', 'redis_db', 'Redis dbid', 0)
+        config.interactive_add('log', 'redis_dbid', 'Redis dbid', 0)
 
 
 def setup(bot):
@@ -42,16 +42,16 @@ def setup(bot):
     """
     global db
     #. get settings
-    host, port, db = None, None, None
+    host, port, dbid = None, None, None
     try:
         host=bot.config.log.redis_host
         port=int(bot.config.log.redis_port)
-        db=bot.config.log.redis_db
+        dbid=int(bot.config.log.redis_db)
     except Exception, e:
         print "%s: Configure the module first!" % (MODULE)
     #. init the DB
-    if all([host, port, db]):
-        pool = redis.ConnectionPool(host=host, port=port, db=db)
+    if all([host, port, dbid]):
+        pool = redis.ConnectionPool(host=host, port=port, db=dbid)
         db = redis.Redis(connection_pool=pool)
         try:
             #. check status
