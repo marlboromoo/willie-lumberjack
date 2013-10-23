@@ -25,6 +25,7 @@ def configure(config):
     | redis_host | localhost | Redis host |
     | redis_port | 6379 | Redis port |
     | redis_dbid | 0 | Redis dbid |
+    | channels| #foo,#bar | IRC channels |
 
     """
     if config.option('Configure log', False):
@@ -32,6 +33,7 @@ def configure(config):
                                'Redis host', 'localhost')
         config.interactive_add('log', 'redis_port', 'Redis port', 6379)
         config.interactive_add('log', 'redis_dbid', 'Redis dbid', 0)
+        config.interactive_add('log', 'channels', '#foo,bar')
 
 
 def setup(bot):
@@ -42,15 +44,17 @@ def setup(bot):
     """
     global db
     #. get settings
-    host, port, dbid = None, None, None
+    host, port, dbid, channels = None, None, None, None
     try:
         host=bot.config.log.redis_host
         port=int(bot.config.log.redis_port)
         dbid=int(bot.config.log.redis_dbid)
+        channels=bot.config.log.channels.split(',')
     except Exception, e:
         print "%s: Configure the module first!" % (MODULE)
+        return
     #. init the DB
-    if all([host, port, str(dbid)]):
+    if all([host, port, str(dbid), channels]):
         pool = redis.ConnectionPool(host=host, port=port, db=dbid)
         db = redis.Redis(connection_pool=pool)
         try:
@@ -58,7 +62,7 @@ def setup(bot):
             db.info()
             #. init channels
             db.delete(CHANNELS)
-            db.rpush(CHANNELS, [c for c in bot.channels])
+            db.rpush(CHANNELS, [c for c in channels])
         except Exception, e:
             print "%s: DB init fail - %s" % (MODULE, e)
 
@@ -77,8 +81,6 @@ def _log(channel, time, nick, msg):
         key = "%s:%s:%s" % (channel, time, nick)
         db.rpush(key, json.dumps(
             dict(channel=channel, time=time, nick=nick, msg=msg)))
-        #print key
-        #print db.lrange(key, 0, -1)
     except Exception, e:
         print "%s: logging fail - %s " % (MODULE, e)
 
@@ -93,7 +95,7 @@ def log(bot, trigger):
     #. only log message in the channel not from other IRC users
     if logging and db and trigger.sender.startswith('#'):
         _log(trigger.sender, int(time.time()), trigger.nick, trigger.bytes)
-    print trigger.sender, int(time.time()), trigger.nick, trigger.bytes
+        print trigger.sender, int(time.time()), trigger.nick, trigger.bytes
 
 @willie.module.commands('startlog')
 def startlog(bot, trigger):
