@@ -13,6 +13,7 @@ import willie
 import redis
 
 MODULE = 'log'
+CHANNELS = 'log:channels'
 db = None
 logging = True
 
@@ -52,11 +53,15 @@ def setup(bot):
     if all([host, port, db]):
         pool = redis.ConnectionPool(host=host, port=port, db=db)
         db = redis.Redis(connection_pool=pool)
-        #. check status
         try:
+            #. check status
             db.info()
+            #. init channels
+            db.delete(CHANNELS)
+            db.rpush(CHANNELS, [c for c in bot.channels])
         except Exception, e:
             print "%s: DB init fail - %s" % (MODULE, e)
+
 
 def _log(channel, time, nick, msg):
     """@todo: Docstring for _log.
