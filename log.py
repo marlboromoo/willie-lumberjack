@@ -63,7 +63,8 @@ def setup(bot):
             db.info()
             #. init channels
             db.delete(CHANNELS)
-            db.rpush(CHANNELS, [c for c in channels])
+            for c in channels:
+                db.rpush(CHANNELS, c)
         except Exception, e:
             print "%s: DB init fail - %s" % (MODULE, e)
 
