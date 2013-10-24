@@ -2,3 +2,5 @@ Willie
 hiredis
 redis
 arrow
+bottle
+bottle-redis

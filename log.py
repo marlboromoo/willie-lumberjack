@@ -11,6 +11,7 @@ import time
 import json
 import willie
 import redis
+import arrow
 
 MODULE = 'log'
 CHANNELS = 'log:channels'
@@ -78,9 +79,10 @@ def _log(channel, time, nick, msg):
 
     """
     try:
-        key = "%s:%s:%s" % (channel, time, nick)
+        date = arrow.now().format("YYYY-MM-DD")
+        key = "%s:%s" % (channel, date)
         db.rpush(key, json.dumps(
-            dict(channel=channel, time=time, nick=nick, msg=msg)))
+            dict(time=time, nick=nick, msg=msg)))
     except Exception, e:
         print "%s: logging fail - %s " % (MODULE, e)
 
