@@ -9,6 +9,11 @@
           <td width="75%">{{row['msg']}}</td>
         </tr>
         % end
+        % if len(rows) < 1:
+        <tr>
+          <td>Nothing here.</td>
+        </tr>
+        % end
       </table>
 
 %rebase layout title=None, extra_title='', project=project, channel=channel, channels=channels, date=date

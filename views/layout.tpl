@@ -32,12 +32,12 @@
       <div class="navbar-collapse collapse navbar-collapse-01">
         <ul class="nav navbar-nav navbar-left">
           <li>
-            <a href="/channels">
+            <a href="#">
               {{project}}
             </a>
           </li>
           <li class="active">
-            <a href="#">
+            <a href="/channels/">
               Channels
               <span class="navbar-unread">1</span>
             </a>
