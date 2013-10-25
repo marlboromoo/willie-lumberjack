@@ -2,7 +2,11 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
+    % if title:
+    <title>{{project}} | {{title}}</title>
+    % else:
     <title>{{project}} | #{{channel}} {{extra_title}}</title>
+    % end
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Loading Bootstrap -->
@@ -28,7 +32,7 @@
       <div class="navbar-collapse collapse navbar-collapse-01">
         <ul class="nav navbar-nav navbar-left">
           <li>
-            <a href="/random">
+            <a href="/channels">
               {{project}}
             </a>
           </li>
@@ -88,5 +92,6 @@
     <script src="/_static/flat-ui/js/flatui-radio.js"></script>
     <script src="/_static/flat-ui/js/jquery.tagsinput.js"></script>
     <script src="/_static/flat-ui/js/jquery.placeholder.js"></script>
+    <script src="/_static/flat-ui/bootstrap/js/holder.js"></script>
   </body>
 </html>

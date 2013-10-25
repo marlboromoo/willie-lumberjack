@@ -73,8 +73,9 @@ def root(rdb):
 def channels(rdb, slash):
     """Channels view.
     """
-    channels = rdb.lrange(CHANNELS, 0, -1)
-    return channels
+    return bottle.template('channels',
+                           project=config.PROJECT,
+                           channels=get_channels(rdb))
 
 @app.get('/channel/<channel><slash:re:/*>')
 def channel(rdb, channel, slash):

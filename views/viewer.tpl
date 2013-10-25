@@ -11,4 +11,4 @@
         % end
       </table>
 
-%rebase layout extra_title='', project=project, channel=channel, channels=channels, date=date
+%rebase layout title=None, extra_title='', project=project, channel=channel, channels=channels, date=date
