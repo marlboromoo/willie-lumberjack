@@ -143,8 +143,7 @@ def show_log(rdb, channel, date, slash):
     rows = []
     for i in get_logs(rdb, channel, date):
         rows.append(irc_row(i))
-    print get_channels(rdb)
-    return bottle.template('viewer', 
+    return bottle.template('viewer',
                            project=config.PROJECT,
                            channel=channel,
                            date=str_date(date),
@@ -152,14 +151,20 @@ def show_log(rdb, channel, date, slash):
                            rows=rows)
 
 @app.get('/channel/<channel>/<date>/<line:int>')
-def quotes(rdb, channel, date, line):
-    """Show the quotes.
+def show_quote(rdb, channel, date, line):
+    """Show the quote.
     """
-    logs = get_logs(rdb, channel , date)
     try:
-        return simple_view(json.loads(logs[line - 1]))
+        logs = get_logs(rdb, channel , date)
+        row = irc_row(logs[line - 1])
     except Exception:
-        return str(None)
+        row = None
+    return bottle.template('quote',
+                           project=config.PROJECT,
+                           channel=channel,
+                           date=str_date(date),
+                           channels=get_channels(rdb),
+                           row=row)
 
 if __name__ == '__main__':
     bottle.run(
