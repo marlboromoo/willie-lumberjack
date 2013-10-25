@@ -167,6 +167,37 @@ def show_quote(rdb, channel, date, line):
                            channels=get_channels(rdb),
                            row=row)
 
+@app.error(404)
+def _error404(error):
+    """404 error handler.
+    """
+    #return "404"
+    bottle.response.status = 303
+    bottle.response.headers['Location'] = '/404'
+
+@app.error(500)
+def _error500(error):
+    """500 error handler.
+    """
+    bottle.response.status = 303
+    bottle.response.headers['Location'] = '/500'
+
+@app.get('/404')
+def error404(rdb):
+    """Error 404 view.
+    """
+    return bottle.template('error404',
+                           project=config.PROJECT,
+                           channels=get_channels(rdb))
+
+@app.get('/500')
+def error500(rdb):
+    """Error 500 view.
+    """
+    return bottle.template('error500',
+                           project=config.PROJECT,
+                           channels=get_channels(rdb))
+
 if __name__ == '__main__':
     bottle.run(
         app=app, host=config.BIND_HOST, port=config.BIND_PORT,
