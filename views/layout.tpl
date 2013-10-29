@@ -46,9 +46,10 @@
             </button>
             <a class="navbar-brand" href="/channels/">{{project}}</a>
           </div>
+
           <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-              <li class="dropdown">
+              <li class="dropdown active">
                 <a href="/Channels/" class="dropdown-toggle" data-toggle="dropdown">Channels<b class="caret"></b></a>
                 <ul class="dropdown-menu">
                   % for c in channels:
@@ -61,13 +62,22 @@
                 </ul>
               </li>
               % if channel:
-              <li><a href="/channel/{{channel}}/today/">Today</a></li>
-              <li><a href="/channel/{{channel}}/yesterday/">Yesterday</a></li>
+              <li><a href="/channel/{{channel}}/today/">Today / </a></li>
+              <li><a href="/channel/{{channel}}/yesterday/">Yesterday / </a></li>
               % end
             </ul>
 
+            % if channel:
+            <form class="navbar-form navbar-left" role="search" method="post" action="/go2date">
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="YYYY-MM-DD" name="date">
+                <input type="hidden" name="channel" value="{{channel}}">
+              </div>
+            </form>
+            % end
+
             <ul class="nav navbar-nav navbar-right">
-              <li><a href="/archive/">Archive</a></li>
+              <li><a href="/archive/">Archive/</a></li>
             </ul>
 
           </div><!--/.nav-collapse -->

@@ -167,6 +167,18 @@ def show_quote(rdb, channel, date, line):
                            channels=get_channels(rdb),
                            row=row)
 
+@app.post('/go2date')
+def go2date(rdb):
+    """@todo: Docstring for go2date.
+
+    :rdb: @todo
+    :returns: @todo
+
+    """
+    channel = bottle.request.forms.channel
+    date = bottle.request.forms.date
+    bottle.redirect("/channel/%s/%s/" % (urllib.quote_plus(channel), date))
+
 @app.error(404)
 def _error404(error):
     """404 error handler.
