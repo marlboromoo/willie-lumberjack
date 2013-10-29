@@ -41,11 +41,17 @@ def str_date(string):
     :returns: @todo
 
     """
-    date = string
-    if date == 'today':
-        date = arrow.now().format("YYYY-MM-DD")
-    if date =='yesterday':
-        date = arrow.now().replace(days=-1).format("YYYY-MM-DD")
+    format_ = 'YYYY-MM-DD'
+    if string == 'today':
+        date = arrow.now().format(format_)
+    elif string =='yesterday':
+        date = arrow.now().replace(days=-1).format(format_)
+    else:
+        try:
+            date = arrow.get(string, format_)
+            date = date.format(format_)
+        except Exception:
+            date = None
     return date
 
 def channel_name(channel):
@@ -141,31 +147,40 @@ def show_log(rdb, channel, date, slash):
     :returns: @todo
 
     """
-    rows = []
-    for i in get_logs(rdb, channel, date):
-        rows.append(irc_row(i))
-    return bottle.template('viewer',
-                           project=config.PROJECT,
-                           channel=channel,
-                           date=str_date(date),
-                           channels=get_channels(rdb),
-                           rows=rows)
+    date = str_date(date)
+    if date:
+        rows = []
+        for i in get_logs(rdb, channel, date):
+            rows.append(irc_row(i))
+        return bottle.template('viewer',
+                               project=config.PROJECT,
+                               channel=channel,
+                               date=date,
+                               channels=get_channels(rdb),
+                               rows=rows)
+    else:
+        bottle.redirect('/channel/%s/today/' % (channel))
 
 @app.get('/channel/<channel>/<date>/<line:int>')
 def show_quote(rdb, channel, date, line):
     """Show the quote.
     """
-    try:
-        logs = get_logs(rdb, channel , date)
-        row = irc_row(logs[line - 1])
-    except Exception:
-        row = None
-    return bottle.template('quote',
-                           project=config.PROJECT,
-                           channel=channel,
-                           date=str_date(date),
-                           channels=get_channels(rdb),
-                           row=row)
+    date = str_date(date)
+    if date:
+        try:
+            logs = get_logs(rdb, channel , date)
+            row = irc_row(logs[line - 1])
+        except Exception:
+            row = None
+        return bottle.template('quote',
+                               project=config.PROJECT,
+                               channel=channel,
+                               date=date,
+                               channels=get_channels(rdb),
+                               row=row)
+    else:
+        bottle.redirect('/channel/%s/today/' % (channel))
+
 
 @app.post('/go2date')
 def go2date(rdb):
@@ -176,8 +191,10 @@ def go2date(rdb):
 
     """
     channel = bottle.request.forms.channel
-    date = bottle.request.forms.date
-    bottle.redirect("/channel/%s/%s/" % (urllib.quote_plus(channel), date))
+    date = str_date(bottle.request.forms.date)
+    date = date if date else 'today'
+    bottle.redirect("/channel/%s/%s/" % (
+        urllib.quote_plus(channel), date))
 
 @app.error(404)
 def _error404(error):
