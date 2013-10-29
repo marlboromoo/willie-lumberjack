@@ -2,6 +2,11 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="/_static/bootstrap/assets/ico/favicon.png">
+
     % if title:
     <title>{{project}} | {{title}}</title>
     % else:
@@ -9,84 +14,72 @@
     % end
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Loading Bootstrap -->
-    <link href="/_static/flat-ui/bootstrap/css/bootstrap.css" rel="stylesheet">
-    <link href="/_static/flat-ui/bootstrap/css/sticky-footer.css" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <!--
+    <link href="/_static/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    -->
+    <link href="/_static/bootswatch/flatly/bootstrap.css" rel="stylesheet">
 
-    <!-- Loading Flat UI -->
-    <link href="/_static/flat-ui/css/flat-ui.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="/_static/bootstrap/examples/sticky-footer-navbar/sticky-footer-navbar.css" rel="stylesheet">
 
-    <link rel="shortcut icon" href="/_static/flat-ui/images/favicon.ico">
-
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
-      <script src="js/html5shiv.js"></script>
+      <script src="../../assets/js/html5shiv.js"></script>
+      <script src="../../assets/js/respond.min.js"></script>
     <![endif]-->
   </head>
+
   <body>
 
-    <div class="navbar navbar-inverse">
-      <div class="navbar-header">
-          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-collapse-01"></button>
-      </div>
-      <div class="navbar-collapse collapse navbar-collapse-01">
-        <ul class="nav navbar-nav navbar-left">
-          <li>
-            <a href="#">
-              {{project}}
-            </a>
-          </li>
-          <li class="active">
-            <a href="/channels/">
-              Channels
-              <span class="navbar-unread">1</span>
-            </a>
-            <ul>
-              % for c in channels:
-              <li>
-                <a href="/channel/{{c}}/">{{c}}</a>
-              </li>
-              % end
-            </ul> <!-- /Sub menu -->
-          </li>
-          % if channel:
-          <li>
-            <a href="/channel/{{channel}}/today/">
-              Today
-            </a>
-          </li>
-          <li>
-            <a href="/channel/{{channel}}/yesterday/">
-              Yesterday
-            </a>
-          </li>
-          <li>
-            <a href="/more">
-              Even more
-            </a>
-          </li>
-          % end
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <li>
-            <a href="/archive">
-              Archive
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              Messages
-              <span class="navbar-unread">1</span>
-            </a>
-          </li>
-        </ul>
-      </div><!--/.nav -->
-    </div>
+    <!-- Wrap all page content here -->
+    <div id="wrap">
 
-    <div id="wrap" class="container">
-      %include
-    </div>
+      <!-- Fixed navbar -->
+      <div class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/channels/">{{project}}</a>
+          </div>
+          <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+              <li class="dropdown">
+                <a href="/Channels/" class="dropdown-toggle" data-toggle="dropdown">Channels<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  % for c in channels:
+                  <li><a href="/channel/{{c}}/">{{c}}</a></li>
+                  % end
+                  <!--
+                  <li class="divider"></li>
+                  <li class="dropdown-header">Nav header</li>
+                  -->
+                </ul>
+              </li>
+              % if channel:
+              <li><a href="/channel/{{channel}}/today/">Today</a></li>
+              <li><a href="/channel/{{channel}}/yesterday/">Yesterday</a></li>
+              % end
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="/archive/">Archive</a></li>
+            </ul>
+
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+
+
+      <div class="container">
+        %include
+      </div>
     <!-- /.container -->
+    </div>
 
     <div id="footer">
       <div class="container">
@@ -95,16 +88,7 @@
     </div>
 
     <!-- Load JS here for greater good =============================-->
-    <script src="/_static/flat-ui/js/jquery-1.8.3.min.js"></script>
-    <script src="/_static/flat-ui/js/jquery-ui-1.10.3.custom.min.js"></script>
-    <script src="/_static/flat-ui/js/jquery.ui.touch-punch.min.js"></script>
-    <script src="/_static/flat-ui/js/bootstrap.min.js"></script>
-    <script src="/_static/flat-ui/js/bootstrap-select.js"></script>
-    <script src="/_static/flat-ui/js/bootstrap-switch.js"></script>
-    <script src="/_static/flat-ui/js/flatui-checkbox.js"></script>
-    <script src="/_static/flat-ui/js/flatui-radio.js"></script>
-    <script src="/_static/flat-ui/js/jquery.tagsinput.js"></script>
-    <script src="/_static/flat-ui/js/jquery.placeholder.js"></script>
-    <script src="/_static/flat-ui/bootstrap/js/holder.js"></script>
+    <script src="/_static/bootstrap/assets/js/jquery.js"></script>
+    <script src="/_static/bootstrap/dist/js/bootstrap.min.js"></script>
   </body>
 </html>
