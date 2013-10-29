@@ -49,4 +49,4 @@
         % end
       </div>
 
-% rebase layout title='channels', project=project, channels=channels
+% rebase layout title='channels', project=project, channel=None, channels=channels

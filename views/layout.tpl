@@ -45,21 +45,34 @@
               % for c in channels:
               <li>
                 <a href="/channel/{{c}}/">{{c}}</a>
-                <ul>
-                  <li><a href="/channel/{{c}}/today/">today</a></li>
-                  <li><a href="/channel/{{c}}/yesterday/">yesterday</a></li>
-                </ul> <!-- /Sub menu -->
               </li>
               % end
             </ul> <!-- /Sub menu -->
           </li>
+          % if channel:
+          <li>
+            <a href="/channel/{{channel}}/today/">
+              Today
+            </a>
+          </li>
+          <li>
+            <a href="/channel/{{channel}}/yesterday/">
+              Yesterday
+            </a>
+          </li>
+          <li>
+            <a href="/more">
+              Even more
+            </a>
+          </li>
+          % end
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
           <li>
             <a href="/archive">
               Archive
             </a>
           </li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
           <li>
             <a href="#">
               Messages
