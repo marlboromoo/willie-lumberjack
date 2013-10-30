@@ -79,9 +79,13 @@ def root(rdb):
 def channels(rdb, slash):
     """Channels view.
     """
+    status, channels = [], get_channels(rdb)
+    for c in channels:
+        status.append(dict(name=c, length=len(get_logs(rdb, c, 'today'))))
     return bottle.template('channels',
                            project=config.PROJECT,
-                           channels=get_channels(rdb))
+                           channels=channels,
+                           status=status)
 
 @app.get('/channel/<channel><slash:re:/*>')
 def channel(rdb, channel, slash):

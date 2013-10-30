@@ -4,16 +4,16 @@
       <h2>#Channels <small>...</small></h3>
       <div class="row">
         % i = 0
-        % if channels:
-          % for c in channels:
-        <a href="/channel/{{c}}/">
+        % if status:
+          % for s in status:
+        <a href="/channel/{{s['name']}}/">
         <div class="col-md-4">
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h3 class="panel-title">#{{c}}</h3>
+              <h3 class="panel-title">#{{s['name']}}</h3>
             </div>
             <div class="panel-body">
-              <p>Status here.</p>
+              <p>{{s['length']}} messages.</p>
             </div>
           </div>
         </div>
