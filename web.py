@@ -2,7 +2,7 @@
 # encoding: utf-8
 
 """
-web.py - Web viewr for willie log module.
+web.py - Web viewr for willie-lumberjack module.
 Copyright 2013, Timothy Lee <marlboromoo@gmail.com>
 Licensed under the MIT License.
 """
