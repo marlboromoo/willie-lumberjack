@@ -2,7 +2,7 @@
 # encoding: utf-8
 
 """
-log.py - A log module for willie.
+lumberjack.py - A logging module for willie.
 Copyright 2013, Timothy Lee <marlboromoo@gmail.com>
 Licensed under the MIT License.
 """
@@ -13,7 +13,7 @@ import willie
 import redis
 import arrow
 
-MODULE = 'log'
+MODULE = 'lumberjack'
 CHANNELS = 'log:channels'
 db = None
 logging = True
@@ -21,7 +21,7 @@ logging = True
 def configure(config):
     """
 
-    | [log] | example | purpose |
+    | [lumberjack] | example | purpose |
     | ----- | ------- | ------- |
     | redis_host | localhost | Redis host |
     | redis_port | 6379 | Redis port |
@@ -29,12 +29,12 @@ def configure(config):
     | channels| #foo,#bar | IRC channels |
 
     """
-    if config.option('Configure log', False):
-        config.interactive_add('log', 'redis_host',
+    if config.option('Configure lumberjack', False):
+        config.interactive_add('lumberjack', 'redis_host',
                                'Redis host', 'localhost')
-        config.interactive_add('log', 'redis_port', 'Redis port', 6379)
-        config.interactive_add('log', 'redis_dbid', 'Redis dbid', 0)
-        config.interactive_add('log', 'channels', '#foo,bar')
+        config.interactive_add('lumberjack', 'redis_port', 'Redis port', 6379)
+        config.interactive_add('lumberjack', 'redis_dbid', 'Redis dbid', 0)
+        config.interactive_add('lumberjack', 'channels', '#foo,bar')
 
 
 def setup(bot):
