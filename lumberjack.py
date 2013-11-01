@@ -2,7 +2,7 @@
 # encoding: utf-8
 
 """
-lumberjack.py - A logging module for willie.
+config.py - A logging module for willie.
 Copyright 2013, Timothy Lee <marlboromoo@gmail.com>
 Licensed under the MIT License.
 """
@@ -47,10 +47,11 @@ def setup(bot):
     #. get settings
     host, port, dbid, channels = None, None, None, None
     try:
-        host=bot.config.log.redis_host
-        port=int(bot.config.log.redis_port)
-        dbid=int(bot.config.log.redis_dbid)
-        channels=bot.config.log.channels.split(',')
+        config = getattr(bot.config, MODULE)
+        host=config.redis_host
+        port=int(config.redis_port)
+        dbid=int(config.redis_dbid)
+        channels=config.channels.split(',')
     except Exception, e:
         print "%s: Configure the module first!" % (MODULE)
         return
