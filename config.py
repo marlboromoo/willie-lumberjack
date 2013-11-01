@@ -5,7 +5,7 @@
 img_convert
 """
 
-PROJECT='Willie-log'
+PROJECT='Willie-Lumberjack'
 
 #. bottle
 BIND_HOST='127.0.1.1'
