@@ -100,5 +100,7 @@
     <!-- Load JS here for greater good =============================-->
     <script src="/_static/bootstrap/assets/js/jquery.js"></script>
     <script src="/_static/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/_static/js/socketio/socket.io.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/_static/js/app.js" type="text/javascript" charset="utf-8"></script>
   </body>
 </html>

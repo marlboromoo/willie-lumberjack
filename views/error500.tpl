@@ -1,5 +1,5 @@
 
-      <h2>Woops <small>Something's wrong.</small></h3>
+      <h2>Woops <small>Something's wrong.</small></h2>
       <pre>
                                          i~~~
                                         / \

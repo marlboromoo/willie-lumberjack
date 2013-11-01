@@ -82,9 +82,10 @@ def _log(channel, time, nick, msg):
     """
     try:
         date = arrow.now().format("YYYY-MM-DD")
-        key = "%s:%s" % (channel, date)
+        key = channel_ = "%s:%s" % (channel, date)
         db.rpush(key, json.dumps(
             dict(time=time, nick=nick, msg=msg)))
+        db.publish(channel_, True)
     except Exception, e:
         print "%s: logging fail - %s " % (MODULE, e)
 

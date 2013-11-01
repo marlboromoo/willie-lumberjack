@@ -11,12 +11,18 @@ import json
 import urllib
 import bottle
 from bottle.ext import redis
+from redis import Redis
+from socketio import socketio_manage
+from socketio.namespace import BaseNamespace
+from gevent import monkey
 import arrow
-
 import config
 
-CHANNELS = 'log:channels'
-#. init the DB
+###############################################################################
+# Setup the APP
+###############################################################################
+
+monkey.patch_all()
 app = bottle.Bottle()
 plugin = redis.RedisPlugin(
     host = config.REDIS_HOST,
@@ -24,6 +30,20 @@ plugin = redis.RedisPlugin(
     database = int(config.REDIS_DBID),
 )
 app.install(plugin)
+
+CHANNELS = 'log:channels'
+
+
+###############################################################################
+# Helper function
+###############################################################################
+
+def get_redis_from_app(app):
+    attr = 'redisdb'
+    for p in app.plugins:
+        if hasattr(p, attr):
+            return Redis(connection_pool=getattr(p, attr))
+    return None
 
 def str_time(epoch):
     """@todo: Docstring for time.
@@ -62,40 +82,6 @@ def channel_name(channel):
 
     """
     return "#%s" % channel if not channel.startswith('#') else channel
-
-@app.get('/_static/<filepath:path>')
-def get_static(filepath):
-    """Return static file.
-    """
-    return bottle.static_file(filepath, root='./static/')
-
-@app.get('/')
-def root(rdb):
-    """Root view.
-    """
-    bottle.redirect('/channels')
-
-@app.get('/channels<slash:re:/*>')
-def channels(rdb, slash):
-    """Channels view.
-    """
-    status, channels = [], get_channels(rdb)
-    for c in channels:
-        status.append(dict(name=c, length=len(get_logs(rdb, c, 'today'))))
-    return bottle.template('channels',
-                           project=config.PROJECT,
-                           channels=channels,
-                           status=status)
-
-@app.get('/channel/<channel><slash:re:/*>')
-def channel(rdb, channel, slash):
-    """@todo: Docstring for channel.
-
-    :rdb: @todo
-    :returns: @todo
-
-    """
-    bottle.redirect("/channel/%s/today/" % (urllib.quote_plus(channel)))
 
 def get_logs(rdb, channel, date):
     """@todo: Docstring for get_logs.
@@ -140,6 +126,60 @@ def irc_row(str_json):
     data = json.loads(str_json)
     return dict(
         time=str_time(data['time']), nick=data['nick'], msg=data['msg'])
+
+###############################################################################
+# Helper class
+###############################################################################
+
+class LogNameSpace(BaseNamespace):
+    """NameSpace for socketio. """
+    def on_join(self, msg):
+        redis = get_redis_from_app(app)
+        key = channel = msg
+        sub = redis.pubsub()
+        sub.subscribe(channel)
+        for i in sub.listen():
+            if i['type'] == 'message':
+                self.emit('recive', redis.lrange(key, -1, -1)[0])
+        sub.unsubscribe()
+
+###############################################################################
+# View
+###############################################################################
+
+@app.get('/_static/<filepath:path>')
+def get_static(filepath):
+    """Return static file.
+    """
+    return bottle.static_file(filepath, root='./static/')
+
+@app.get('/')
+def root(rdb):
+    """Root view.
+    """
+    bottle.redirect('/channels')
+
+@app.get('/channels<slash:re:/*>')
+def channels(rdb, slash):
+    """Channels view.
+    """
+    status, channels = [], get_channels(rdb)
+    for c in channels:
+        status.append(dict(name=c, length=len(get_logs(rdb, c, 'today'))))
+    return bottle.template('channels',
+                           project=config.PROJECT,
+                           channels=channels,
+                           status=status)
+
+@app.get('/channel/<channel><slash:re:/*>')
+def channel(rdb, channel, slash):
+    """@todo: Docstring for channel.
+
+    :rdb: @todo
+    :returns: @todo
+
+    """
+    bottle.redirect("/channel/%s/today/" % (urllib.quote_plus(channel)))
 
 @app.get('/channel/<channel>/<date><slash:re:/*>')
 def show_log(rdb, channel, date, slash):
@@ -231,9 +271,21 @@ def error500(rdb):
                            project=config.PROJECT,
                            channels=get_channels(rdb))
 
+@app.get('/socket.io/<path:path>')
+def socketio_service(path):
+    """socket.io connect path.
+    """
+    socketio_manage(bottle.request.environ,
+                    {'/log': LogNameSpace}, bottle.request)
+
+###############################################################################
+# Main
+###############################################################################
+
 if __name__ == '__main__':
     bottle.run(
         app=app, host=config.BIND_HOST, port=config.BIND_PORT,
+        server='geventSocketIO',
         debug=True, reloader=True)
 else:
     application = app

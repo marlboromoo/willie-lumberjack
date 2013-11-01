@@ -1,7 +1,7 @@
 % nick = row['nick'] if row else 's0me0ne'
 % msg = row['msg'] if row else '...'
 
-      <h2>#{{channel}} <small>{{date}}</small></h3>
+      <h2>#{{channel}} <small>{{date}}</small></h2>
       % if row:
       <div class="well">
         <p class="lead"><b>{{row['nick']}} &gt</b></p>
