@@ -30,12 +30,6 @@ $(function () {
         $('#viewer').append(str);
 
         //. Notice on navbar
-        //if ($("#notice").length == 0) {
-        //    $('#message').append('<span class="badge" id="notice">New</span>');
-        //}
-        //
-        //
-
         $("#notice").text(Number($('#notice').text()) + 1);
         $("#message").click(function () {
             $("#notice").empty();
