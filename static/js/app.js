@@ -6,16 +6,18 @@ $(function () {
     });
     socket.on('recive', function (data) {
         console.log(data);
+
+        //. Show the row
         var row = jQuery.parseJSON(data);
         $("#trash").remove();
 
-        var str = '<tr><td width="10%">[{time}]</td>' + 
+        var str = '<tr id="new"><td width="10%">[{time}]</td>' + 
         '<td width="15%"><a href="/channel/{channel}/{date}/{line}">{nick}</a></td>' +
         '<td width="75%">{msg}</td></tr>';
 
         var line = Number($('#line').text()) + 1;
         $("#line").text(line);
-        
+
         var epoch = row["time"] * 1000;
         str = str.assign({
             time:       Date.create(epoch).format('{hh}:{mm}:{ss}'),
@@ -26,5 +28,17 @@ $(function () {
             msg:        row["msg"],
         });
         $('#viewer').append(str);
+
+        //. Notice on navbar
+        //if ($("#notice").length == 0) {
+        //    $('#message').append('<span class="badge" id="notice">New</span>');
+        //}
+        //
+        //
+
+        $("#notice").text(Number($('#notice').text()) + 1);
+        $("#message").click(function () {
+            $("#notice").empty();
+        })
     });
 });

@@ -77,7 +77,10 @@
             % end
 
             <ul class="nav navbar-nav navbar-right">
+              % if channel:
               <li><a href="/archive/">Archive/</a></li>
+              <li><a href="#new" id="message">Message <span class="badge" id="notice"></span></a></li>
+              % end
             </ul>
 
           </div><!--/.nav-collapse -->
