@@ -6,11 +6,25 @@ $(function () {
     });
     socket.on('recive', function (data) {
         console.log(data);
-        var row = jQuery.parseJSON(data)
-        $('#viewer').append(
-            '<tr><td width="10%">' + row["time"] + '</td>' +
-            '<td width="15%"><a href="/channel/' + $('#chname').text() + '/' + $('#date').text() + '/' + '??' + '">' + row["nick"] + '</a></td>' +
-            '<td width="75%">' + row["msg"] + '</td></tr>'
-            );
+        var row = jQuery.parseJSON(data);
+        $("#trash").remove();
+
+        var str = '<tr><td width="10%">[{time}]</td>' + 
+        '<td width="15%"><a href="/channel/{channel}/{date}/{line}">{nick}</a></td>' +
+        '<td width="75%">{msg}</td></tr>';
+
+        var line = Number($('#line').text()) + 1;
+        $("#line").text(line);
+        
+        var epoch = row["time"] * 1000;
+        str = str.assign({
+            time:       Date.create(epoch).format('{hh}:{mm}:{ss}'),
+            channel:    $('#chname').text(),
+            date:       Date.create(epoch).format('{yyyy}-{MM}-{dd}'),
+            line:       line,
+            nick:       row["nick"],
+            msg:        row["msg"],
+        });
+        $('#viewer').append(str);
     });
 });
