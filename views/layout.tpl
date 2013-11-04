@@ -49,8 +49,8 @@
 
           <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-              <li class="dropdown active">
-                <a href="/Channels/" class="dropdown-toggle" data-toggle="dropdown">Channels<b class="caret"></b></a>
+              <li class="dropdown">
+                <a href="/Channels/" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-bullhorn"></span> Channels<b class="caret"></b></a>
                 <ul class="dropdown-menu">
                   % for c in channels:
                   <li><a href="/channel/{{c}}/">{{c}}</a></li>
@@ -65,8 +65,12 @@
 
             <ul class="nav navbar-nav navbar-right">
               % if channel:
-              <li><a href="/archive/">Archive/</a></li>
-              <li><a href="#new" id="message">Message <span class="badge" id="notice"></span></a></li>
+              <li><a href="/archive/"><span class="glyphicon glyphicon-hdd"></span> Archive/</a></li>
+              <li>
+                <a href="#new" id="message">
+                  <span class="glyphicon glyphicon-bell"></span> Message <span class="badge" id="notice"></span>
+                </a>
+              </li>
               % end
             </ul>
 
@@ -83,7 +87,7 @@
 
     <div id="footer">
       <div class="container">
-        <p class="text-muted credit pull-right">{{project}} 2013.</p>
+        <p class="text-muted credit pull-right">{{project}} 2013 - Build with <span class="glyphicon glyphicon-heart"></p>
       </div>
     </div>
 
