@@ -87,7 +87,8 @@
 
     <div id="footer">
       <div class="container">
-        <p class="text-muted credit pull-right">{{project}} 2013 - Build with <span class="glyphicon glyphicon-heart"></p>
+        <p class="text-muted credit pull-right">
+          {{project}} 2013 / <a href="https://github.com/marlboromoo/willie-lumberjack" target="_blank">GitHub</a> / Build with <span class="glyphicon glyphicon-heart"></p>
       </div>
     </div>
 
@@ -97,5 +98,6 @@
     <script src="/_static/js/socketio/socket.io.js" type="text/javascript" charset="utf-8"></script>
     <script src="/_static/js/sugar.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="/_static/js/app.js" type="text/javascript" charset="utf-8"></script>
+
   </body>
 </html>

@@ -1,12 +1,14 @@
-% least = 9
+% least = 6
 % pre_line = 3
 
-      <p>
+      <br/>
+      <br/>
       <div class="jumbotron">
         <h1>{{project}}</h1>
         <p>A logging module for Willie IRC bot with real-time log viewer.</p>
-          <a class="btn btn-lg btn-primary" href="#">Read more &raquo;</a>
+          <a class="btn btn-primary pull-right" href="#">Read more &raquo;</a>
         </p>
+        <br/>
       </div>
       <div class="row">
         % i = 0
