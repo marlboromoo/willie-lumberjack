@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="shortcut icon" href="/_static/bootstrap/assets/ico/favicon.png">
+    <link rel="shortcut icon" href="/_static/ico/favicon.ico">
 
     % if title:
     <title>{{project}} | {{title}}</title>
