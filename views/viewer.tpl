@@ -25,32 +25,23 @@
             % end
             </tbody>
           </table>
+          <div id="down"></div>
         </div>
 
         <div class="col-xs-6 col-sm-3">
-
-<!--
-          <ul id="sidebar" class="nav nav-pills nav-stacked affix">
-            <li><a href="#">Today</a></li>
-            <li><a href="#">Yesterday</a></li>
-          </ul>
--->
-
-<!--
-          <div class="list-group affix">
-            <a href="#" class="list-group-item">&gt; Today</a>
-            <a href="#" class="list-group-item">&gt; Yesterday</a>
-          </div>
--->
-
           <form class="form-horizontal affix" role="form" method="post" action="/go2date">
             <div class="form-group">
             <span class="glyphicon glyphicon-calendar"></span>
-            <label for="exampleInputEmail2"> View By Date</label>
+            <label> View By Date</label>
             <input type="text" class="form-control" placeholder="YYYY-MM-DD" name="date" data-toggle="tooltip" title="Enter the date to go!">
             <input type="hidden" name="channel" value="{{channel}}">
             <a href="/channel/{{channel}}/today/" class="list-group-item"><span class="glyphicon glyphicon-star"></span> Today</a>
             <a href="/channel/{{channel}}/yesterday/" class="list-group-item"><span class="glyphicon glyphicon-star"></span> Yesterday</a>
+            <br/>
+            <span class="glyphicon glyphicon-flash"></span>
+            <label> Shortcut</label>
+            <a href="#" class="list-group-item"><span class="glyphicon glyphicon-chevron-up"></span> Top</a>
+            <a href="#down" class="list-group-item"><span class="glyphicon glyphicon-chevron-down"></span> Down</a>
             </div>
           </form>
         </div>
