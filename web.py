@@ -7,8 +7,10 @@ Copyright 2013, Timothy Lee <marlboromoo@gmail.com>
 Licensed under the MIT License.
 """
 
+import sys
 import json
 import urllib
+import logging
 import bottle
 from bottle.ext import redis
 from redis import Redis
@@ -16,13 +18,21 @@ from socketio import socketio_manage
 from socketio.namespace import BaseNamespace
 from gevent import monkey
 import arrow
+import yapdi
+
 import config
 
 ###############################################################################
 # Setup the APP
 ###############################################################################
 
-monkey.patch_all()
+logging.basicConfig(
+            filename=config.LOGFILE,
+            format='%(asctime)s - %(levelname)s - %(message)s',
+            #datefmt='%Y-%M-%d %H:%M:%S',
+            level=logging.DEBUG,
+)
+
 app = bottle.Bottle()
 plugin = redis.RedisPlugin(
     host = config.REDIS_HOST,
@@ -126,6 +136,22 @@ def irc_row(str_json):
     data = json.loads(str_json)
     return dict(
         time=str_time(data['time']), nick=data['nick'], msg=data['msg'])
+
+def run(dev=False):
+    """@todo: Docstring for run.
+
+    :dev: @todo
+    :returns: @todo
+
+    """
+    debug, reloader = False, False
+    if dev:
+        debug, reloader = True, True
+    monkey.patch_all()
+    bottle.run(
+        app=app, host=config.BIND_HOST, port=config.BIND_PORT,
+        server='geventSocketIO',
+        debug=debug, reloader=reloader)
 
 ###############################################################################
 # Helper class
@@ -283,10 +309,40 @@ def socketio_service(path):
 ###############################################################################
 
 if __name__ == '__main__':
-    bottle.run(
-        app=app, host=config.BIND_HOST, port=config.BIND_PORT,
-        server='geventSocketIO',
-        debug=True, reloader=True)
+    ctrls = ['start', 'stop', 'status', 'dev']
+    daemon = yapdi.Daemon(pidfile=config.PIDFILE, stderr=config.LOGFILE)
+    if len(sys.argv) == 2 and sys.argv[1] in ctrls:
+        arg = sys.argv[1]
+        if arg == 'start':
+            if daemon.status():
+                print "Pidfile exist: %s, %s(%s) is running already!" % (
+                    config.PIDFILE, config.APPNAME, daemon.status())
+                exit()
+            retcode = daemon.daemonize()
+            if retcode == yapdi.OPERATION_SUCCESSFUL:
+                try:
+                    run(dev=False)
+                except KeyboardInterrupt:
+                    exit()
+        if arg == 'stop':
+            if not daemon.status():
+                print "%s is not running!" % (config.APPNAME)
+                exit()
+            retcode = daemon.kill()
+            if retcode == yapdi.OPERATION_FAILED:
+                print "Error during %s stop!" % (config.APPNAME)
+                exit(1)
+            else:
+                print "%s was stopped." % (config.APPNAME)
+        if arg == 'status':
+            if not daemon.status():
+                print "%s is not running!" % (config.APPNAME)
+            else:
+                print "%s(%s) is running." % (config.APPNAME, daemon.status())
+        if arg == 'dev':
+                run(dev=True)
+    else:
+        print 'Usage: web.py <%s>' % '|'.join(ctrls)
 else:
     application = app
 
