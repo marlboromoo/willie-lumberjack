@@ -45,7 +45,7 @@
               <a href="#down" class="list-group-item"><span class="glyphicon glyphicon-chevron-down"></span> Down</a>
               <br/>
               <span class="glyphicon glyphicon-hdd"></span>
-              <label> Archives</label>
+              <label> Archive</label>
               <a href="/archives/{{channel}}/{{date}}.txt" class="list-group-item" target="_blank"><span class="glyphicon glyphicon-download-alt"></span> Download</a>
               </div>
             </form>
