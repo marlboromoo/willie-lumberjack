@@ -7,7 +7,7 @@
         <div class="row">
           <div class="col-xs-12 col-sm-9">
             <h2>#{{channel}} <small id="date">{{date}}</small></h2>
-            <table class="table table-hover">
+            <table class="table">
               <tbody id="viewer">
               % i = 0
               % for row in rows:
