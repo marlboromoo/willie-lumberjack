@@ -20,7 +20,7 @@
             % end
             % if len(rows) < 1:
             <tr id="trash">
-              <td>Nothing here.</td>
+              <td>Nothing here. Try <a href="/archives/{{channel}}/{{date}}.txt" target="_blank">Archive</a>.</td>
             </tr>
             % end
             </tbody>
@@ -42,6 +42,10 @@
             <label> Shortcut</label>
             <a href="#" class="list-group-item"><span class="glyphicon glyphicon-chevron-up"></span> Top</a>
             <a href="#down" class="list-group-item"><span class="glyphicon glyphicon-chevron-down"></span> Down</a>
+            <br/>
+            <span class="glyphicon glyphicon-hdd"></span>
+            <label> Archives</label>
+            <a href="/archives/{{channel}}/{{date}}.txt" class="list-group-item" target="_blank"><span class="glyphicon glyphicon-download-alt"></span> Download</a>
             </div>
           </form>
         </div>

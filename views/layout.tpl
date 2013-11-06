@@ -60,12 +60,14 @@
                   <li class="dropdown-header">Nav header</li>
                   -->
                 </ul>
+              <!--
+              <li><a href="/archives/"><span class="glyphicon glyphicon-hdd"></span> Archives/</a></li>
+              -->
               </li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
               % if channel:
-              <li><a href="/archive/"><span class="glyphicon glyphicon-hdd"></span> Archive/</a></li>
               <li>
                 <a href="#new" id="message">
                   <span class="glyphicon glyphicon-bell"></span> Message <span class="badge" id="notice">0</span>

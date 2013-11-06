@@ -12,6 +12,7 @@ import json
 import urllib
 import logging
 import re
+import os
 import bottle
 from bottle.ext import redis
 from redis import Redis
@@ -230,6 +231,17 @@ def show_quote(rdb, channel, date, line):
     else:
         bottle.redirect('/channel/%s/today/' % (channel))
 
+@app.get('/archives/<channel>/<log>')
+def get_archive(rdb, channel, log):
+    """@todo: Docstring for archive.
+
+    :rdb: @todo
+    :returns: @todo
+
+    """
+    return bottle.static_file(
+        os.path.join("#%s" % channel, log),
+        root=config.LOG_PATH)
 
 @app.post('/go2date')
 def go2date(rdb):

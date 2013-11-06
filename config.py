@@ -19,3 +19,5 @@ REDIS_HOST = '10.10.5.32'
 REDIS_PORT = 6379
 REDIS_DBID = 0
 
+#. log
+LOG_PATH = '/tmp/lumberjack/'
