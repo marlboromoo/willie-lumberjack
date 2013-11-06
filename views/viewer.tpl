@@ -1,8 +1,8 @@
 
-        <p/>
         <div class="hidden" id="chkey">#{{channel}}:{{date}}</div>
         <div class="hidden" id="chname">{{channel}}</div>
         <div class="hidden" id="line">{{len(rows)}}</div>
+        <div class="hidden" id="socketio">{{socketio}}</div>
 
         <div class="row">
           <div class="col-xs-12 col-sm-9">
@@ -29,6 +29,7 @@
           </div>
 
           <div class="col-xs-6 col-sm-3">
+            <br/>
             <form class="form affix" role="form" method="post" action="/go2date">
               <div class="form-group">
               <span class="glyphicon glyphicon-calendar"></span>
@@ -51,4 +52,4 @@
           </div>
         </div>
 
-%rebase layout title=None, extra_title='', project=project, channel=channel, channels=channels, date=date
+%rebase layout title=None, extra_title='', project=project, channel=channel, channels=channels, date=date, socketio=socketio

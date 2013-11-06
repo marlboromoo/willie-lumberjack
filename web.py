@@ -188,7 +188,7 @@ def channel(rdb, channel, slash):
     bottle.redirect("/channel/%s/today/" % (urllib.quote_plus(channel)))
 
 @app.get('/channel/<channel>/<date><slash:re:/*>')
-def show_log(rdb, channel, date, slash):
+def viewer(rdb, channel, date, slash):
     """@todo: Docstring for show_log.
 
     :rdb: @todo
@@ -197,6 +197,7 @@ def show_log(rdb, channel, date, slash):
     :returns: @todo
 
     """
+    socketio = True if date == 'today' else False
     date = str_date(date)
     if date:
         rows = []
@@ -207,7 +208,8 @@ def show_log(rdb, channel, date, slash):
                                channel=channel,
                                date=date,
                                channels=get_channels(rdb),
-                               rows=rows)
+                               rows=rows,
+                               socketio=socketio)
     else:
         bottle.redirect('/channel/%s/today/' % (channel))
 
