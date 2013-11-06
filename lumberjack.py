@@ -121,7 +121,6 @@ def str_date(string):
     else:
         try:
             date = arrow.get(string).format(format_)
-            date = date.format(format_)
         except Exception:
             date = None
     return date

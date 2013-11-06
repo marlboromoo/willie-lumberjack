@@ -17,9 +17,9 @@ from redis import Redis
 from socketio import socketio_manage
 from socketio.namespace import BaseNamespace
 from gevent import monkey
-import arrow
 import yapdi
 
+from lumberjack import str_time, str_date, CHANNELS
 import config
 
 ###############################################################################
@@ -41,9 +41,6 @@ plugin = redis.RedisPlugin(
 )
 app.install(plugin)
 
-CHANNELS = 'log:channels'
-
-
 ###############################################################################
 # Helper function
 ###############################################################################
@@ -54,35 +51,6 @@ def get_redis_from_app(app):
         if hasattr(p, attr):
             return Redis(connection_pool=getattr(p, attr))
     return None
-
-def str_time(epoch):
-    """@todo: Docstring for time.
-
-    :epoch: @todo
-    :returns: @todo
-
-    """
-    return arrow.get(epoch).to('local').format("HH:mm:ss")
-
-def str_date(string):
-    """@todo: Docstring for date.
-
-    :string: @todo
-    :returns: @todo
-
-    """
-    format_ = 'YYYY-MM-DD'
-    if string == 'today':
-        date = arrow.now().format(format_)
-    elif string =='yesterday':
-        date = arrow.now().replace(days=-1).format(format_)
-    else:
-        try:
-            date = arrow.get(string, format_)
-            date = date.format(format_)
-        except Exception:
-            date = None
-    return date
 
 def channel_name(channel):
     """@todo: Docstring for channel_name.
