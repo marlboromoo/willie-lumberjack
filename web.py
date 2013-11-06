@@ -11,6 +11,7 @@ import sys
 import json
 import urllib
 import logging
+import re
 import bottle
 from bottle.ext import redis
 from redis import Redis
@@ -121,6 +122,16 @@ def run(dev=False):
         server='geventSocketIO',
         debug=debug, reloader=reloader)
 
+def is_strdate(string):
+    """@todo: Docstring for is_strdate.
+
+    :string: @todo
+    :returns: @todo
+
+    """
+    p = re.compile('[0-9]{4}-[0-9]{2}-[0-9]{2}')
+    return True if p.search(string) else False
+
 ###############################################################################
 # Helper class
 ###############################################################################
@@ -228,8 +239,10 @@ def go2date(rdb):
     :returns: @todo
 
     """
+    #. regx for date
     channel = bottle.request.forms.channel
-    date = str_date(bottle.request.forms.date)
+    date = str_date(bottle.request.forms.date) \
+            if is_strdate(bottle.request.forms.date) else None
     date = date if date else 'today'
     bottle.redirect("/channel/%s/%s/" % (
         urllib.quote_plus(channel), date))
