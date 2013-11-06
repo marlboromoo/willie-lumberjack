@@ -68,7 +68,7 @@
               <li><a href="/archive/"><span class="glyphicon glyphicon-hdd"></span> Archive/</a></li>
               <li>
                 <a href="#new" id="message">
-                  <span class="glyphicon glyphicon-bell"></span> Message <span class="badge" id="notice"></span>
+                  <span class="glyphicon glyphicon-bell"></span> Message <span class="badge" id="notice">0</span>
                 </a>
               </li>
               % end

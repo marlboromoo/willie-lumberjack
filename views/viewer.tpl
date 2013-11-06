@@ -29,7 +29,7 @@
         </div>
 
         <div class="col-xs-6 col-sm-3">
-          <form class="form-horizontal affix" role="form" method="post" action="/go2date">
+          <form class="form affix" role="form" method="post" action="/go2date">
             <div class="form-group">
             <span class="glyphicon glyphicon-calendar"></span>
             <label> View By Date</label>
