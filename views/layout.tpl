@@ -15,10 +15,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Bootstrap core CSS -->
-    <!--
-    <link href="/_static/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
-    -->
-    <link href="/_static/bootswatch/flatly/bootstrap.css" rel="stylesheet">
+    <link href="/_static/bootswatch/readable/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="/_static/bootstrap/examples/sticky-footer-navbar/sticky-footer-navbar.css" rel="stylesheet">
@@ -50,7 +47,7 @@
           <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
               <li class="dropdown">
-                <a href="/Channels/" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-bullhorn"></span> Channels<b class="caret"></b></a>
+                <a href="/channels/" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-bullhorn"></span> Channels<b class="caret"></b></a>
                 <ul class="dropdown-menu">
                   % for c in channels:
                   <li><a href="/channel/{{c}}/">{{c}}</a></li>
@@ -95,7 +92,7 @@
     </div>
 
     <!-- Load JS here for greater good =============================-->
-    <script src="/_static/bootstrap/assets/js/jquery.js"></script>
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="/_static/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="/_static/js/socketio/socket.io.js" type="text/javascript" charset="utf-8"></script>
     <script src="/_static/js/sugar.min.js" type="text/javascript" charset="utf-8"></script>
