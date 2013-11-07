@@ -133,6 +133,22 @@ def is_strdate(string):
     p = re.compile('[0-9]{4}-[0-9]{2}-[0-9]{2}')
     return True if p.search(string) else False
 
+def set_theme(name):
+    """@todo: Docstring for set_theme.
+
+    :name: @todo
+    :returns: @todo
+
+    """
+    bottle.response.set_cookie("theme", name, path='/')
+
+def get_theme():
+    """@todo: Docstring for get_theme.
+    :returns: @todo
+
+    """
+    return bottle.request.get_cookie('theme')
+
 ###############################################################################
 # Helper class
 ###############################################################################
@@ -233,6 +249,21 @@ def show_quote(rdb, channel, date, line):
     else:
         bottle.redirect('/channel/%s/today/' % (channel))
 
+@app.get('/options<slash:re:/*>')
+def options(rdb, slash):
+    """@todo: Docstring for options.
+
+    :rdb: @todo
+    :returns: @todo
+
+    """
+    return bottle.template('options',
+                           project=config.PROJECT,
+                           channel=channel,
+                           channels=get_channels(rdb),
+                           themes = config.BOOTSWATCH_THEMES,
+                          )
+
 @app.get('/archives/<channel>/<log>')
 def get_archive(rdb, channel, log):
     """@todo: Docstring for archive.
@@ -244,6 +275,17 @@ def get_archive(rdb, channel, log):
     return bottle.static_file(
         os.path.join("#%s" % channel, log),
         root=config.LOG_PATH)
+
+@app.get('/themes/<theme>')
+def themes(rdb, theme):
+    """@todo: Docstring for themes.
+
+    :rdb: @todo
+    :returns: @todo
+
+    """
+    set_theme(theme)
+    bottle.redirect('/options')
 
 @app.post('/go2date')
 def go2date(rdb):

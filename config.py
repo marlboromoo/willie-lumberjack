@@ -21,3 +21,19 @@ REDIS_DBID = 0
 
 #. log
 LOG_PATH = '/tmp/lumberjack/'
+
+#. theme
+BOOTSWATCH_THEMES = {
+    #'amelia' : 'Sweet and cheery',
+    'cerulean' : 'A calm, blue sky',
+    #'cosmo' : 'An ode to Metro',
+    #'cyborg' : 'Jet black and electric blue',
+    'flatly' : 'Flat and modern',
+    'journal' : 'Crisp like a new sheet of paper',
+    'readable' : 'Optimized for legibility',
+    'simplex' : 'Mini and minimalist',
+    #'slate' : 'Shades of gunmetal gray',
+    'spacelab' : 'Silvery and sleek',
+    'united': 'Ubuntu orange and unique font',
+}
+

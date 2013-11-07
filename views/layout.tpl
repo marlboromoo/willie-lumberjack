@@ -1,3 +1,8 @@
+% import bottle
+% theme = bottle.request.get_cookie('theme')
+% theme = theme or 'readable'
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -15,7 +20,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Bootstrap core CSS -->
-    <link href="/_static/bootswatch/readable/bootstrap.min.css" rel="stylesheet">
+    <link href="/_static/bootswatch/{{theme}}/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="/_static/bootstrap/examples/sticky-footer-navbar/sticky-footer-navbar.css" rel="stylesheet">
@@ -57,13 +62,11 @@
                   <li class="dropdown-header">Nav header</li>
                   -->
                 </ul>
-              <!--
-              <li><a href="/archives/"><span class="glyphicon glyphicon-hdd"></span> Archives/</a></li>
-              -->
               </li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
+              <li><a href="/options/"><span class="glyphicon glyphicon-wrench"></span> Options</a></li>
               % if all([channel, socketio]):
               <li>
                 <a href="#new" id="message">
