@@ -3,4 +3,4 @@
 	url = https://github.com/twbs/bootstrap
 [submodule "static/bootswatch"]
 	path = static/bootswatch
-	url = https://github.com/thomaspark/bootswatch
+	url = https://github.com/marlboromoo/bootswatch
