@@ -97,7 +97,7 @@
     <!-- Load JS here for greater good =============================-->
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="/_static/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="/_static/js/socketio/socket.io.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/_static/js/socketio/socket.io.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="/_static/js/sugar.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="/_static/js/app.js" type="text/javascript" charset="utf-8"></script>
 
