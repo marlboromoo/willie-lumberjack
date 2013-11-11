@@ -2,7 +2,7 @@
 # encoding: utf-8
 
 """
-config.py - A logging module for willie.
+lumberjack.py - A logging module for willie.
 Copyright 2013, Timothy Lee <marlboromoo@gmail.com>
 Licensed under the MIT License.
 """
