@@ -5,7 +5,7 @@
         <div class="jumbotron">
           <h1>{{project}}</h1>
           <p>A logging module for Willie IRC bot with real-time log viewer.</p>
-            <a class="btn btn-primary pull-right" href="https://github.com/marlboromoo/willie-lumberjack/blob/master/README.md">Read more &raquo;</a>
+            <a class="btn btn-primary pull-right" href="http://marlboromoo.github.io/willie-lumberjack/">Read more &raquo;</a>
           </p>
           <br/>
         </div>
