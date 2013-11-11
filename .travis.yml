@@ -5,7 +5,14 @@ python:
 before_install:
   - sudo apt-get update
   - sudo apt-get install python python-dev python-pip redis-server build-essential libevent-dev
+  - sudo apt-get install redis-server
 install:
   - pip install -r requirements.txt #--use-mirrors
-script: python web.py start; python web.py stop
+before_script: 
+  - mkdir -p ~/.willie/modules
+  - ln -s lumberjack.py ~/.willie/modules/
+  - ln -s doc/logbot.cfg ~/.willie/default.cfg
+  - sed -i 's/host =.*/host = 127.0.0.1/g' ~/.willie/default.cfg
+  - sed -i "s/REDIS_HOST =.*/REDIS_HOST = '127.0.0.1'/g" config.py
+script: willie -d; python web.py start; python web.py stop; willie -q; cat /tmp/web.log
 
