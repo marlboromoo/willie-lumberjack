@@ -10,18 +10,13 @@
             <div class="table-responsive">
               <table class="table">
                 <tbody id="viewer">
-                <tr class="hidden">
-                  <th class="col-sm-1">Time</th>
-                  <th class="col-sm-2">Nick</th>
-                  <th class="col-sm-9">Message</th>
-                </tr>
                 % i = 0
                 % for row in rows:
                   % i += 1
                 <tr>
-                  <td>[{{row['time']}}]</td>
-                  <td><a href="/channel/{{channel}}/{{date}}/{{i}}">{{row['nick']}}</a></td>
-                  <td>{{row['msg']}}</td>
+                  <td width="10%">[{{row['time']}}]</td>
+                  <td width="15%"><a href="/channel/{{channel}}/{{date}}/{{i}}">{{row['nick']}}</a></td>
+                  <td width="75%">{{row['msg']}}</td>
                 </tr>
                 % end
                 % if len(rows) < 1:

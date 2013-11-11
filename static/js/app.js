@@ -15,9 +15,9 @@ $(function () {
             var line = Number($('#line').text()) + 1;
             $("#line").text(line);
 
-            var str = '<tr id="new{line}"><td>[{time}]</td>' + 
-            '<td><a href="/channel/{channel}/{date}/{line}">{nick}</a></td>' +
-            '<td>{msg}</td></tr>';
+            var str = '<tr id="new{line}"><td width="10%">[{time}]</td>' + 
+            '<td width="15%"><a href="/channel/{channel}/{date}/{line}">{nick}</a></td>' +
+            '<td width="75%">{msg}</td></tr>';
 
             var epoch = row["time"] * 1000;
             str = str.assign({
