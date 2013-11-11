@@ -103,21 +103,21 @@ Full example can find in the [/doc] [] folder.
 Check the [config.py] [] to see the full example.
 
 #### Bottle
-`BIND_HOST`: IP Address  to listen.
-`BIND_PORT`: TCP port to listen.
-`LOGFILE`: Log path
-`PIDFILE`: PID file path.
+ - `BIND_HOST`: IP Address  to listen.
+ - `BIND_PORT`: TCP port to listen.
+ - `LOGFILE`: Log path
+ - `PIDFILE`: PID file path.
 
 #### Redis
-`REDIS_HOST`: Redis server address.
-`REDIS_PORT`: Redis server port.
-`REDIS_DBID`: Redis DB id.
+ - `REDIS_HOST`: Redis server address.
+ - `REDIS_PORT`: Redis server port.
+ - `REDIS_DBID`: Redis DB id.
 
 #### Log
-`LOG_PATH`: Path to the plain text log.
+ - `LOG_PATH`: Path to the plain text log.
 
 #### Theme
-`BOOTSWATCH_THEMES`: Themes to enable.
+ - `BOOTSWATCH_THEMES`: Themes to enable.
 
 ## Usage
 TODO.
