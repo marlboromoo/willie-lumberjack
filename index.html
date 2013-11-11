@@ -1,0 +1,248 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Willie-lumberjack by marlboromoo</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/respond.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body>
+      <div id="header">
+        <nav>
+          <li class="fork"><a href="https://github.com/marlboromoo/willie-lumberjack">View On GitHub</a></li>
+          <li class="downloads"><a href="https://github.com/marlboromoo/willie-lumberjack/zipball/master">ZIP</a></li>
+          <li class="downloads"><a href="https://github.com/marlboromoo/willie-lumberjack/tarball/master">TAR</a></li>
+          <li class="title">DOWNLOADS</li>
+        </nav>
+      </div><!-- end header -->
+
+    <div class="wrapper">
+
+      <section>
+        <div id="title">
+          <h1>Willie-lumberjack</h1>
+          <p>A logging module for Willie IRC bot with real-time log viewer.</p>
+          <hr>
+          <span class="credits left">Project maintained by <a href="https://github.com/marlboromoo">marlboromoo</a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
+        </div>
+
+        <h1>
+<a name="willie-lumberjack" class="anchor" href="#willie-lumberjack"><span class="octicon octicon-link"></span></a>Willie-Lumberjack</h1>
+
+<p>A logging module for <a href="http://willie.dftba.net/" title="Willie">Willie</a> IRC bot with real-time log viewer.</p>
+
+<pre><code>Willie-
+ __                          __                                          __
+/\ \                        /\ \                     __                 /\ \
+\ \ \      __  __    ___ ___\ \ \____     __   _ __ /\_\     __      ___\ \ \/'\
+ \ \ \  __/\ \/\ \ /' __` __`\ \ '__`\  /'__`\/\`'__\/\ \  /'__`\   /'___\ \ , &lt;
+  \ \ \L\ \ \ \_\ \/\ \/\ \/\ \ \ \L\ \/\  __/\ \ \/ \ \ \/\ \L\.\_/\ \__/\ \ \\`\
+   \ \____/\ \____/\ \_\ \_\ \_\ \_,__/\ \____\\ \_\ _\ \ \ \__/.\_\ \____\\ \_\ \_\
+    \/___/  \/___/  \/_/\/_/\/_/\/___/  \/____/ \/_//\ \_\ \/__/\/_/\/____/ \/_/\/_/
+                                                    \ \____/
+                                                     \/___/
+
+                                      Lumberjack will chopping the log for you.
+</code></pre>
+
+<h2>
+<a name="features" class="anchor" href="#features"><span class="octicon octicon-link"></span></a>Features</h2>
+
+<ul>
+<li>Real-time log viewer</li>
+<li>Themes (<a href="http://bootswatch.com/" title="Free themes for Bootstrap">Bootswatch</a>)</li>
+<li>...</li>
+</ul><h2>
+<a name="requirments" class="anchor" href="#requirments"><span class="octicon octicon-link"></span></a>Requirments</h2>
+
+<ul>
+<li>Python</li>
+<li><a href="http://redis.io/" title="Advanced key-value store">Redis</a></li>
+<li><a href="http://willie.dftba.net/" title="Willie">Willie</a></li>
+<li><a href="https://github.com/andymccurdy/redis-py" title="Python client for Redis key-value store">redis-py</a></li>
+<li><a href="https://github.com/defnull/bottle" title="Python Web Framework">bottle.py</a></li>
+<li><a href="https://github.com/bottlepy/bottle-extras/tree/master/redis" title="Redis integration for Bottle.">bottle-redis</a></li>
+<li><a href="https://github.com/abourget/gevent-socketio" title="Python implementation of the Socket.IO protocol">gevent-socketio</a></li>
+<li><a href="https://github.com/crsmithdev/arrow" title="Better dates &amp; times for Python">arrow</a></li>
+<li><a href="https://github.com/kasun/YapDi" title="Yet another python Daemon implementation">YapDi</a></li>
+</ul><h2>
+<a name="install" class="anchor" href="#install"><span class="octicon octicon-link"></span></a>Install</h2>
+
+<h3>
+<a name="dependency" class="anchor" href="#dependency"><span class="octicon octicon-link"></span></a>Dependency</h3>
+
+<div class="highlight highlight-sh"><pre>sudo apt-get install python python-dev python-pip redis-server <span class="se">\</span>
+build-essential libevent-dev
+</pre></div>
+
+<h3>
+<a name="wilie-lumberjack" class="anchor" href="#wilie-lumberjack"><span class="octicon octicon-link"></span></a>Wilie-Lumberjack</h3>
+
+<div class="highlight highlight-sh"><pre><span class="nb">cd</span> ~
+git clone https://github.com/marlboromoo/willie-lumberjack.git
+<span class="nb">cd </span>willie-lumberjack
+git submodule init
+git submodule update
+sudo pip install requirements.txt
+<span class="nb">cd</span> ~/.willie/
+ln -s ~/willie_lumberjack/lumberjack.py ./modules/
+cp ~/willie_lumberjack/config/logbot.cfg ./default.cfg
+<span class="c">#. start the ircbot</span>
+willie -d
+<span class="c">#. start the web server</span>
+<span class="nb">cd</span> ~/willie-lumberjack 
+python web.py start
+</pre></div>
+
+<h2>
+<a name="update" class="anchor" href="#update"><span class="octicon octicon-link"></span></a>Update</h2>
+
+<ol>
+<li>Stop the ircbot &amp; web server.</li>
+</ol><div class="highlight highlight-sh"><pre><span class="c">#. stop the web server</span>
+<span class="nb">cd</span> ~/.willie-lumberjack
+python web.py stop
+<span class="c">#. stop the ircbot</span>
+willie -q
+</pre></div>
+
+<ol>
+<li>Update.</li>
+</ol><div class="highlight highlight-sh"><pre><span class="nb">cd</span> ~/willie-lumberjack
+git pull
+git submodule update
+</pre></div>
+
+<ol>
+<li>Start the ircbot &amp; web server.</li>
+</ol><div class="highlight highlight-sh"><pre><span class="c">#. start the web server</span>
+<span class="nb">cd</span> ~/.willie-lumberjack
+python web.py start
+<span class="c">#. start the ircbot</span>
+willie -d
+</pre></div>
+
+<h2>
+<a name="configuration" class="anchor" href="#configuration"><span class="octicon octicon-link"></span></a>Configuration</h2>
+
+<h3>
+<a name="module" class="anchor" href="#module"><span class="octicon octicon-link"></span></a>Module</h3>
+
+<p>Full example can find in the <a href="https://github.com/marlboromoo/willie-lumberjack/tree/master/doc">/doc</a> folder.</p>
+
+<table>
+<thead><tr>
+<th>[lumberjack]</th>
+<th>example</th>
+<th>purpose</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>redis_host</td>
+<td>localhost</td>
+<td>Redis host</td>
+</tr>
+<tr>
+<td>redis_port</td>
+<td>6379</td>
+<td>Redis port</td>
+</tr>
+<tr>
+<td>redis_dbid</td>
+<td>0</td>
+<td>Redis dbid</td>
+</tr>
+<tr>
+<td>channels</td>
+<td>#foo,#bar</td>
+<td>IRC channels</td>
+</tr>
+<tr>
+<td>log_path</td>
+<td>/tmp/lumberjack/</td>
+<td>Log path</td>
+</tr>
+</tbody>
+</table><h3>
+<a name="web-server" class="anchor" href="#web-server"><span class="octicon octicon-link"></span></a>Web Server</h3>
+
+<p>Check the <a href="https://github.com/marlboromoo/willie-lumberjack/blob/master/config.py">config.py</a> to see the full example.</p>
+
+<h4>
+<a name="bottle" class="anchor" href="#bottle"><span class="octicon octicon-link"></span></a>Bottle</h4>
+
+<ul>
+<li>
+<code>BIND_HOST</code>: IP Address  to listen.</li>
+<li>
+<code>BIND_PORT</code>: TCP port to listen.</li>
+<li>
+<code>LOGFILE</code>: Log path</li>
+<li>
+<code>PIDFILE</code>: PID file path.</li>
+</ul><h4>
+<a name="redis" class="anchor" href="#redis"><span class="octicon octicon-link"></span></a>Redis</h4>
+
+<ul>
+<li>
+<code>REDIS_HOST</code>: Redis server address.</li>
+<li>
+<code>REDIS_PORT</code>: Redis server port.</li>
+<li>
+<code>REDIS_DBID</code>: Redis DB id.</li>
+</ul><h4>
+<a name="log" class="anchor" href="#log"><span class="octicon octicon-link"></span></a>Log</h4>
+
+<ul>
+<li>
+<code>LOG_PATH</code>: Path to the plain text log.</li>
+</ul><h4>
+<a name="theme" class="anchor" href="#theme"><span class="octicon octicon-link"></span></a>Theme</h4>
+
+<ul>
+<li>
+<code>BOOTSWATCH_THEMES</code>: Themes to enable.</li>
+</ul><h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<p>TODO.</p>
+
+<h2>
+<a name="todo" class="anchor" href="#todo"><span class="octicon octicon-link"></span></a>TODO</h2>
+
+<ul>
+<li>Widget</li>
+<li>You tell me</li>
+</ul><h2>
+<a name="status" class="anchor" href="#status"><span class="octicon octicon-link"></span></a>Status</h2>
+
+<p><img src="https://api.travis-ci.org/marlboromoo/willie-lumberjack.png" alt="Travis CI Build Status"></p>
+
+<h2>
+<a name="author" class="anchor" href="#author"><span class="octicon octicon-link"></span></a>Author</h2>
+
+<p>Timothy.Lee a.k.a MarlboroMoo.</p>
+
+<h2>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p>Released under the <a href="http://opensource.org/licenses/MIT" title="MIT License">MIT License</a>.</p>
+      </section>
+
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+</html>
