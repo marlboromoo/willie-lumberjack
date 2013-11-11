@@ -76,7 +76,8 @@ git pull
 git submodule update
 ```
 
- 3. start the ircbot & web server.
+ 3. Start the ircbot & web server.
+
 ```sh
 #. start the web server
 cd ~/.willie-lumberjack
