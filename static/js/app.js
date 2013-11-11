@@ -21,7 +21,7 @@ $(function () {
 
             var epoch = row["time"] * 1000;
             str = str.assign({
-                time: Date.create(epoch).format('{hh}:{mm}:{ss}'),
+                time: Date.create(epoch).format('{HH}:{mm}:{ss}'),
                 channel: $('#chname').text(),
                 date: Date.create(epoch).format('{yyyy}-{MM}-{dd}'),
                 line: line,
