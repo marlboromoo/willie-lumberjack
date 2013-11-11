@@ -120,7 +120,7 @@ def str_date(string):
         date = arrow.now().replace(days=-1).format(format_)
     else:
         try:
-            date = arrow.get(string).format(format_)
+            date = arrow.get(string).to('local').format(format_)
         except Exception:
             date = None
     return date
@@ -136,8 +136,7 @@ def _log(channel, time, nick, msg):
 
     """
     try:
-        date = arrow.now().format("YYYY-MM-DD")
-        key = channel_ = "%s:%s" % (channel, date)
+        key = channel_ = "%s:%s" % (channel, str_date(time))
         db.rpush(key, json.dumps(
             dict(time=time, nick=nick, msg=msg)))
         db.publish(channel_, True)
@@ -179,11 +178,12 @@ def log(bot, trigger):
     :trigger: willie.bot.Willie.Trigger
 
     """
+    time_ = time.time()
     #. only log message in the channel not from other IRC users
     if logging and db and trigger.sender.startswith('#'):
-        _log(trigger.sender, int(time.time()), trigger.nick, trigger.bytes)
-        log2txt(trigger.sender, int(time.time()), trigger.nick, trigger.bytes)
-        print trigger.sender, int(time.time()), trigger.nick, trigger.bytes
+        _log(trigger.sender, int(time_), trigger.nick, trigger.bytes)
+        log2txt(trigger.sender, int(time_), trigger.nick, trigger.bytes)
+        #print trigger.sender, int(time_), trigger.nick, trigger.bytes
 
 @willie.module.commands('startlog')
 def startlog(bot, trigger):
