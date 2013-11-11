@@ -1,5 +1,12 @@
 
-        <h2>Theme</h2>
+        <h2>
+          Theme <small>
+            from Bootswatch 
+            <a href="http://bootswatch.com/" target="_blank">
+              <span class="glyphicon glyphicon-share-alt"></span>
+            </a>
+          </small>
+        </h2>
         <br/>
         <div class="row">
         % for theme in themes:
