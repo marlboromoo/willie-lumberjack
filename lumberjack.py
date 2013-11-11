@@ -98,19 +98,19 @@ def setup(bot):
 ###############################################################################
 
 def str_time(epoch):
-    """@todo: Docstring for time.
+    """Time formatter.
 
-    :epoch: @todo
-    :returns: @todo
+    :epoch: unix epoch
+    :returns: formatted time
 
     """
     return arrow.get(epoch).to('local').format("HH:mm:ss")
 
 def str_date(string):
-    """@todo: Docstring for date.
+    """Date formatter.
 
-    :string: @todo
-    :returns: @todo
+    :string: string represend the date
+    :returns: formatted date
 
     """
     format_ = 'YYYY-MM-DD'
@@ -126,13 +126,12 @@ def str_date(string):
     return date
 
 def _log(channel, time, nick, msg):
-    """@todo: Docstring for _log.
+    """Log to redis DB.
 
-    :time: @todo
-    :channel: @todo
-    :nick: @todo
-    :msg: @todo
-    :returns: @todo
+    :time: unix epoch
+    :channel: IRC channel
+    :nick: IRC nickname
+    :msg: messages
 
     """
     try:
@@ -144,13 +143,12 @@ def _log(channel, time, nick, msg):
         print "%s: logging fail - %s " % (MODULE, e)
 
 def log2txt(channel, time, nick, msg):
-    """@todo: Docstring for log2txt.
+    """Log to plain text file.
 
-    :channel: @todo
-    :time: @todo
-    :nick: @todo
-    :msg: @todo
-    :returns: @todo
+    :channel: IRC channel
+    :time: unix epoch
+    :nick: IRC nickname
+    :msg: messages
 
     """
     try:

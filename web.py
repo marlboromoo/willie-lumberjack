@@ -55,21 +55,21 @@ def get_redis_from_app(app):
     return None
 
 def channel_name(channel):
-    """@todo: Docstring for channel_name.
+    """Get IRC channel name.
 
-    :channel: @todo
-    :returns: @todo
+    :channel: channel name without #
+    :returns: channel name with #
 
     """
     return "#%s" % channel if not channel.startswith('#') else channel
 
 def get_logs(rdb, channel, date):
-    """@todo: Docstring for get_logs.
+    """Get logs with  specify date.
 
-    :rdb: @todo
-    :channel: @todo
-    :date: @todo
-    :returns: @todo
+    :rdb: redis db instance
+    :channel: IRC channel name without #
+    :date: string represend the date
+    :returns: list(logs)
 
     """
     channel, date = channel_name(channel), str_date(date)
@@ -78,29 +78,19 @@ def get_logs(rdb, channel, date):
     return rdb.lrange(key, 0, -1)
 
 def get_channels(rdb):
-    """@todo: Docstring for get_channels.
+    """get IRC channel names without #
 
-    :arg1: @todo
-    :returns: @todo
+    :rdb: redis db instance
+    :returns: list(channels)
 
     """
     return [ c.lstrip('#') for c in rdb.lrange(CHANNELS, 0, -1)]
 
-def simple_view(data):
-    """@todo: Docstring for simple_view.
-
-    :data: @todo
-    :returns: @todo
-
-    """
-    return "%s | %s | %s <br/>" % \
-            (str_time(data['time']) ,data['nick'], data['msg'])
-
 def irc_row(str_json):
-    """@todo: Docstring for irc_row.
+    """Convert IRC log from JSON to dict.
 
-    :str_json: @todo
-    :returns: @todo
+    :str_json: JSON data
+    :returns: dict(data)
 
     """
     data = json.loads(str_json)
@@ -108,10 +98,9 @@ def irc_row(str_json):
         time=str_time(data['time']), nick=data['nick'], msg=data['msg'])
 
 def run(dev=False):
-    """@todo: Docstring for run.
+    """Start the Bottle server.
 
-    :dev: @todo
-    :returns: @todo
+    :dev: True if development else False
 
     """
     debug, reloader = False, False
@@ -124,27 +113,27 @@ def run(dev=False):
         debug=debug, reloader=reloader)
 
 def is_strdate(string):
-    """@todo: Docstring for is_strdate.
+    """Check the date format.
 
-    :string: @todo
-    :returns: @todo
+    :string: string represend the date.
+    :returns: True or False
 
     """
     p = re.compile('[0-9]{4}-[0-9]{2}-[0-9]{2}')
     return True if p.search(string) else False
 
 def set_theme(name):
-    """@todo: Docstring for set_theme.
+    """Set the name of theme in cookie.
 
-    :name: @todo
-    :returns: @todo
+    :name: theme's name
 
     """
     bottle.response.set_cookie("theme", name, path='/')
 
 def get_theme():
-    """@todo: Docstring for get_theme.
-    :returns: @todo
+    """Get the name of theme in cookie.
+
+    :name: theme's name
 
     """
     return bottle.request.get_cookie('theme')
@@ -178,12 +167,19 @@ def get_static(filepath):
 @app.get('/')
 def root(rdb):
     """Root view.
+
+    :rdb: redis DB instance
+
     """
     bottle.redirect('/channels')
 
 @app.get('/channels<slash:re:/*>')
 def channels(rdb, slash):
     """Channels view.
+
+    :rdb: redis DB instance
+    :slash: / or None
+
     """
     status, channels = [], get_channels(rdb)
     for c in channels:
@@ -195,22 +191,22 @@ def channels(rdb, slash):
 
 @app.get('/channel/<channel><slash:re:/*>')
 def channel(rdb, channel, slash):
-    """@todo: Docstring for channel.
+    """Alias for channel view.
 
-    :rdb: @todo
-    :returns: @todo
+    :rdb: redis DB instance
+    :channel: IRC channel name without #
+    :slash: / or None
 
     """
     bottle.redirect("/channel/%s/today/" % (urllib.quote_plus(channel)))
 
 @app.get('/channel/<channel>/<date><slash:re:/*>')
 def viewer(rdb, channel, date, slash):
-    """@todo: Docstring for show_log.
+    """Channel view.
 
-    :rdb: @todo
-    :channel: @todo
-    :date: @todo
-    :returns: @todo
+    :rdb: redis DB instance
+    :channel: IRC channel name without #
+    :date: string represend the date
 
     """
     socketio = True if date == 'today' else False
@@ -232,6 +228,12 @@ def viewer(rdb, channel, date, slash):
 @app.get('/channel/<channel>/<date>/<line:int>')
 def show_quote(rdb, channel, date, line):
     """Show the quote.
+
+    :rdb: redis DB instance
+    :channel: IRC channel name without #
+    :date: string represend the date
+    :line: line number of logs in channel view
+
     """
     date = str_date(date)
     if date:
@@ -251,10 +253,10 @@ def show_quote(rdb, channel, date, line):
 
 @app.get('/options<slash:re:/*>')
 def options(rdb, slash):
-    """@todo: Docstring for options.
+    """Options view.
 
-    :rdb: @todo
-    :returns: @todo
+    :rdb: redis DB instance
+    :slash: / or None
 
     """
     return bottle.template('options',
@@ -266,10 +268,10 @@ def options(rdb, slash):
 
 @app.get('/archives/<channel>/<log>')
 def get_archive(rdb, channel, log):
-    """@todo: Docstring for archive.
+    """Return plain text log file.
 
-    :rdb: @todo
-    :returns: @todo
+    :channel: IRC channel name without #
+    :log: log name
 
     """
     return bottle.static_file(
@@ -278,10 +280,10 @@ def get_archive(rdb, channel, log):
 
 @app.get('/themes/<theme>')
 def themes(rdb, theme):
-    """@todo: Docstring for themes.
+    """API to set the theme.
 
-    :rdb: @todo
-    :returns: @todo
+    :rdb: redis DB instance
+    :theme: theme's name
 
     """
     set_theme(theme)
@@ -289,10 +291,9 @@ def themes(rdb, theme):
 
 @app.post('/go2date')
 def go2date(rdb):
-    """@todo: Docstring for go2date.
+    """API to get the log view.
 
-    :rdb: @todo
-    :returns: @todo
+    :rdb: redis DB instance
 
     """
     #. regx for date
