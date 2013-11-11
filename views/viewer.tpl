@@ -5,30 +5,37 @@
         <div class="hidden" id="socketio">{{socketio}}</div>
 
         <div class="row">
-          <div class="col-xs-12 col-sm-9">
+          <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
             <h2>#{{channel}} <small id="date">{{date}}</small></h2>
-            <table class="table">
-              <tbody id="viewer">
-              % i = 0
-              % for row in rows:
-                % i += 1
-              <tr>
-                <td width="10%">[{{row['time']}}]</td>
-                <td width="15%"><a href="/channel/{{channel}}/{{date}}/{{i}}">{{row['nick']}}</a></td>
-                <td width="75%">{{row['msg']}}</td>
-              </tr>
-              % end
-              % if len(rows) < 1:
-              <tr id="trash">
-                <td>Nothing here. Try <a href="/archives/{{channel}}/{{date}}.txt" target="_blank">Archive</a>.</td>
-              </tr>
-              % end
-              </tbody>
-            </table>
+            <div class="table-responsive">
+              <table class="table">
+                <tbody id="viewer">
+                <tr class="hidden">
+                  <th class="col-sm-1">Time</th>
+                  <th class="col-sm-2">Nick</th>
+                  <th class="col-sm-9">Message</th>
+                </tr>
+                % i = 0
+                % for row in rows:
+                  % i += 1
+                <tr>
+                  <td>[{{row['time']}}]</td>
+                  <td><a href="/channel/{{channel}}/{{date}}/{{i}}">{{row['nick']}}</a></td>
+                  <td>{{row['msg']}}</td>
+                </tr>
+                % end
+                % if len(rows) < 1:
+                <tr id="trash">
+                  <td>Nothing here. Try <a href="/archives/{{channel}}/{{date}}.txt" target="_blank">Archive</a>.</td>
+                </tr>
+                % end
+                </tbody>
+              </table>
+            </div>
             <div id="down"></div>
           </div>
 
-          <div class="col-xs-6 col-sm-3">
+          <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
             <br/>
             <form class="form affix" role="form" method="post" action="/go2date">
               <div class="form-group">
