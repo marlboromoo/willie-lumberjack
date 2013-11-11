@@ -87,11 +87,37 @@ willie -d
 ```
 
 ## Configuration
-### config.py
-TODO.
 
-### logbot.cfg
-TODO.
+### Module
+Full example can find in the [/doc] [] folder.
+
+| [lumberjack] | example | purpose |
+| ------------ | ------- | ------- |
+| redis_host | localhost | Redis host |
+| redis_port | 6379 | Redis port |
+| redis_dbid | 0 | Redis dbid |
+| channels | #foo,#bar | IRC channels |
+| log_path | /tmp/lumberjack/ | Log path |
+
+### Web Server
+Check the [config.py] [] to see the full example.
+
+#### Bottle
+`BIND_HOST`: IP Address  to listen.
+`BIND_PORT`: TCP port to listen.
+`LOGFILE`: Log path
+`PIDFILE`: PID file path.
+
+#### Redis
+`REDIS_HOST`: Redis server address.
+`REDIS_PORT`: Redis server port.
+`REDIS_DBID`: Redis DB id.
+
+#### Log
+`LOG_PATH`: Path to the plain text log.
+
+#### Theme
+`BOOTSWATCH_THEMES`: Themes to enable.
 
 ## Usage
 TODO.
@@ -120,5 +146,7 @@ Released under the [MIT License].
   [arrow]: https://github.com/crsmithdev/arrow "Better dates & times for Python"
   [YapDi]: https://github.com/kasun/YapDi "Yet another python Daemon implementation"
   [Bootswatch]: http://bootswatch.com/ "Free themes for Bootstrap"
+  [/doc]: https://github.com/marlboromoo/willie-lumberjack/tree/master/doc
+  [config.py]: https://github.com/marlboromoo/willie-lumberjack/blob/master/config.py 
 
 
