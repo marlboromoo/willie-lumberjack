@@ -2,6 +2,7 @@ Willie
 hiredis
 redis
 arrow
+gevent
 https://github.com/abourget/gevent-socketio/archive/master.zip
 https://github.com/kasun/YapDi/archive/master.zip
 https://github.com/defnull/bottle/archive/master.zip
