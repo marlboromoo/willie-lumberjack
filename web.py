@@ -216,7 +216,6 @@ def viewer(rdb, channel, date, slash):
         for i in get_logs(rdb, channel, date):
             rows.append(irc_row(i))
         return bottle.template('viewer',
-                               project=config.PROJECT,
                                channel=channel,
                                date=date,
                                channels=get_channels(rdb),
@@ -243,7 +242,6 @@ def show_quote(rdb, channel, date, line):
         except Exception:
             row = None
         return bottle.template('quote',
-                               project=config.PROJECT,
                                channel=channel,
                                date=date,
                                channels=get_channels(rdb),
@@ -260,8 +258,6 @@ def options(rdb, slash):
 
     """
     return bottle.template('options',
-                           project=config.PROJECT,
-                           channel=channel,
                            channels=get_channels(rdb),
                            themes = config.BOOTSWATCH_THEMES,
                           )
@@ -324,7 +320,6 @@ def error404(rdb):
     """Error 404 view.
     """
     return bottle.template('error404',
-                           project=config.PROJECT,
                            channels=get_channels(rdb))
 
 @app.get('/500')
@@ -332,7 +327,6 @@ def error500(rdb):
     """Error 500 view.
     """
     return bottle.template('error500',
-                           project=config.PROJECT,
                            channels=get_channels(rdb))
 
 @app.get('/socket.io/<path:path>')

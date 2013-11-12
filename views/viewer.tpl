@@ -21,7 +21,7 @@
                 % end
                 % if len(rows) < 1:
                 <tr id="trash">
-                  <td>Nothing here. Try <a href="/archives/{{channel}}/{{date}}.txt" target="_blank">Archive</a>.</td>
+                  <td>Nothing here. Try <a href="/archives/{{channel}}/{{date}}.txt">Archive</a>.</td>
                 </tr>
                 % end
                 </tbody>
@@ -48,10 +48,10 @@
               <br/>
               <span class="glyphicon glyphicon-hdd"></span>
               <label> Archive</label>
-              <a href="/archives/{{channel}}/{{date}}.txt" class="list-group-item" target="_blank"><span class="glyphicon glyphicon-download-alt"></span> Download</a>
+              <a href="/archives/{{channel}}/{{date}}.txt" class="list-group-item"><span class="glyphicon glyphicon-download-alt"></span> Download</a>
               </div>
             </form>
           </div>
         </div>
 
-%rebase layout title=None, extra_title='', project=project, channel=channel, channels=channels, date=date, socketio=socketio
+%rebase layout title=None, extra_title='', channel=channel, channels=channels, date=date, socketio=socketio

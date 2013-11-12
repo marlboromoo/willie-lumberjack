@@ -1,7 +1,10 @@
 % import bottle
+% import config
 % theme = bottle.request.get_cookie('theme')
 % theme = theme or 'readable'
-
+% project = config.PROJECT
+% setdefault('socketio', False)
+% setdefault('channel', None)
 
 <!DOCTYPE html>
 <html lang="en">

@@ -20,4 +20,4 @@
         </div>
         %end
 
-% rebase layout title=None, extra_title="| %s > %s" % (nick, msg), project=project, channel=channel, channels=channels, date=date, socketio=None
+% rebase layout title=None, extra_title="| %s > %s" % (nick, msg), channel=channel, channels=channels, date=date

@@ -20,4 +20,4 @@
            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
                             Fail. Check back in a bit!</pre>
 
-% rebase layout title='Server Error', project=project, channel=None, channels=channels, socketio=None
+% rebase layout title='Server Error', channels=channels

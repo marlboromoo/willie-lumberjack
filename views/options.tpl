@@ -25,4 +25,4 @@
         % end
         </div>
 
-% rebase layout title='Options', extra_title=None, project=project, channels=channels, socketio=None
+% rebase layout title='Options', channels=channels

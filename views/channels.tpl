@@ -55,4 +55,4 @@
         </div>
         %end
 
-% rebase layout title='channels', project=project, channel=None, channels=channels, socketio=None
+% rebase layout title='channels', channels=channels

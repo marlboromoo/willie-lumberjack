@@ -24,4 +24,4 @@
         88  _.'     !'|   .' | /                       \|  `  |  `.    |`.|  88
         88 vanishing point 888888888888888888888888888888888888888888888(FL)888</pre>
 
-% rebase layout title='Maze Found', project=project, channel=None, channels=channels, socketio=None
+% rebase layout title='Maze Found', channels=channels
