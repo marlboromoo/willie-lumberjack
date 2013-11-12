@@ -20,4 +20,5 @@
         </div>
         %end
 
-% rebase layout title=None, extra_title="| %s > %s" % (nick, msg), channel=channel, channels=channels, date=date
+% preview = "%s ..." % msg[0:19] if len(msg) >=20 else msg
+% rebase layout title=None, extra_title="| %s > %s" % (nick, preview), channel=channel, channels=channels, date=date
