@@ -11,9 +11,9 @@ install:
 before_script: 
   - mkdir -p ~/.willie/modules
   - ls -ld ~/.willie/modules
-  - ln -s lumberjack.py ~/.willie/modules/
+  - ln -s $(pwd)/lumberjack.py ~/.willie/modules/
   - ls -l ~/.willie/modules/lumberjack.py
-  - ln -s doc/logbot.cfg ~/.willie/default.cfg
+  - ln -s $(pwd)/doc/logbot.cfg ~/.willie/default.cfg
   - ls -l ~/.willie/default.cfg
   - sed -i 's/host =.*/host = 127.0.0.1/g' ~/.willie/default.cfg
   - sed -i "s/REDIS_HOST =.*/REDIS_HOST = '127.0.0.1'/g" config.py
