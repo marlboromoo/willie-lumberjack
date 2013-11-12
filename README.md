@@ -127,7 +127,7 @@ TODO.
  * You tell me
 
 ## Status
-![Travis CI Build Status] []
+[![Travis CI Build Status] []] [Travis CI]
 
 ## Author
 Timothy.Lee a.k.a MarlboroMoo.
@@ -137,6 +137,7 @@ Released under the [MIT License].
 
   [MIT License]: http://opensource.org/licenses/MIT "MIT License"
   [Travis CI Build Status]: https://api.travis-ci.org/marlboromoo/willie-lumberjack.png 
+  [Travis CI]: https://travis-ci.org/marlboromoo/willie-lumberjack
   [Redis]: http://redis.io/ "Advanced key-value store"
   [Willie]: http://willie.dftba.net/ "Willie"
   [redis-py]: https://github.com/andymccurdy/redis-py "Python client for Redis key-value store"
