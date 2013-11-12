@@ -16,7 +16,7 @@
                 <tr>
                   <td width="10%">[{{row['time']}}]</td>
                   <td width="15%"><a href="/channel/{{channel}}/{{date}}/{{i}}">{{row['nick']}}</a></td>
-                  <td width="75%">{{row['msg']}}</td>
+                  <td width="75%" class="msg">{{row['msg']}}</td>
                 </tr>
                 % end
                 % if len(rows) < 1:

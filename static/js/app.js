@@ -1,4 +1,14 @@
 $(function () {
+    //. auto links
+    var url_patten = new RegExp('((ftp|http|https)://[\\w-]+(\\.[\\w-]+)+([\\w-.,@?^=%&:/~+#-]*[\\w@?^=%&;/~+#-])*)', 'g');
+    var url_template = '<a href="$1" target="_blank" class="text-muted">$1</a>'
+    $(".msg").each(function (i) {
+        var row = $(this).text().replace(url_patten, url_template);
+        $(this).text('')
+        $(this).append(row);
+    });
+
+    //. socket.io
     if ($("#socketio").text() == 'True') {
         var WEB_SOCKET_SWF_LOCATION = '/_static/js/socketio/WebSocketMain.swf';
         var socket = io.connect('/log');
@@ -6,8 +16,6 @@ $(function () {
             socket.emit('join', $('#chkey').text());
         });
         socket.on('recive', function (data) {
-            console.log(data);
-
             //. Show the row
             var row = jQuery.parseJSON(data);
             $("#trash").remove();
@@ -17,7 +25,7 @@ $(function () {
 
             var str = '<tr id="new{line}"><td width="10%">[{time}]</td>' + 
             '<td width="15%"><a href="/channel/{channel}/{date}/{line}">{nick}</a></td>' +
-            '<td width="75%">{msg}</td></tr>';
+            '<td width="75%" class="msg">{msg}</td></tr>';
 
             var epoch = row["time"] * 1000;
             str = str.assign({
@@ -26,7 +34,7 @@ $(function () {
                 date: Date.create(epoch).format('{yyyy}-{MM}-{dd}'),
                 line: line,
                 nick: row["nick"],
-                msg: row["msg"],
+                msg: row["msg"].replace(url_patten, url_template),
             });
             $('#viewer').append(str);
 
