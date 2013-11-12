@@ -15,7 +15,7 @@ before_script:
   - ls -l ~/.willie/modules/lumberjack.py
   - ln -s $(pwd)/doc/logbot.cfg ~/.willie/default.cfg
   - ls -l ~/.willie/default.cfg
-  - sed -i 's/host =.*/host = 127.0.0.1/g' ~/.willie/default.cfg
+  - sed -i 's/redis_host =.*/redis_host = 127.0.0.1/g' ~/.willie/default.cfg
   - sed -i "s/REDIS_HOST =.*/REDIS_HOST = '127.0.0.1'/g" config.py
 script: willie -d && python web.py start && python web.py stop && willie -q
 after_script: 
