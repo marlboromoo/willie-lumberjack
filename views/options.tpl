@@ -44,7 +44,7 @@
               <div class="caption text-center">
                 <h3>{{theme.capitalize()}}</h3>
                 <p>{{themes[theme]}}</p>
-                <div class="btn-group"><a class="btn btn-info" href="/themes/{{theme}}">Got it</a></div>
+                <div class="btn-group"><a class="btn btn-info" href="/options/themes/{{theme}}">Got it</a></div>
               </div>
             </div>
           </div>

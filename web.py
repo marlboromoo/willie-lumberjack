@@ -301,7 +301,7 @@ def get_archive(rdb, channel, log):
         os.path.join("#%s" % channel, log),
         root=config.LOG_PATH)
 
-@app.get('/themes/<theme>')
+@app.get('/options/themes/<theme>')
 def themes(rdb, theme):
     """API to set the theme.
 
