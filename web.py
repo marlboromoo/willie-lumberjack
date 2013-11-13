@@ -138,6 +138,26 @@ def get_theme():
     """
     return bottle.request.get_cookie('theme')
 
+def set_autolinks(value):
+    """Set autolinks to value in cookie.
+
+    :value: Ture or False
+
+    """
+    bottle.response.set_cookie('autolinks', value, path='/')
+
+def is_autolinks():
+    """Return True if autolinks is True in cookie else False
+
+    :returns: True or False
+
+    """
+    try:
+        value = bottle.request.get_cookie('autolinks')
+        return True if value.lower() in ['true', '1'] else False
+    except Exception:
+        return False
+
 ###############################################################################
 # Helper class
 ###############################################################################
@@ -220,7 +240,9 @@ def viewer(rdb, channel, date, slash):
                                date=date,
                                channels=get_channels(rdb),
                                rows=rows,
-                               socketio=socketio)
+                               socketio=socketio,
+                               autolinks=is_autolinks(),
+                              )
     else:
         bottle.redirect('/channel/%s/today/' % (channel))
 
@@ -257,9 +279,14 @@ def options(rdb, slash):
     :slash: / or None
 
     """
+    autolinks = is_autolinks()
+    autolinks_true_active = 'active' if autolinks else ''
+    autolinks_false_active= 'active' if not autolinks else ''
     return bottle.template('options',
                            channels=get_channels(rdb),
                            themes = config.BOOTSWATCH_THEMES,
+                           autolinks_true_active=autolinks_true_active,
+                           autolinks_false_active=autolinks_false_active,
                           )
 
 @app.get('/archives/<channel>/<log>')
@@ -283,6 +310,17 @@ def themes(rdb, theme):
 
     """
     set_theme(theme)
+    bottle.redirect('/options')
+
+@app.get('/options/autolinks/<value>')
+def autolinks(rdb, value):
+    """API to set the option autolinks.
+
+    :rdb: redis DB instance
+    :value: True or False
+
+    """
+    set_autolinks(value)
     bottle.redirect('/options')
 
 @app.post('/go2date')

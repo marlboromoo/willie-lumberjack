@@ -1,12 +1,14 @@
 $(function () {
     //. auto links
     var url_patten = new RegExp('((ftp|http|https)://[\\w-]+(\\.[\\w-]+)+([\\w-.,@?^=%&:/~+#-]*[\\w@?^=%&;/~+#-])*)', 'g');
-    var url_template = '<a href="$1" target="_blank" class="text-muted">$1</a>'
-    $(".msg").each(function (i) {
-        var row = $(this).text().replace(url_patten, url_template);
-        $(this).text('')
-        $(this).append(row);
-    });
+    if ($("#autolinks").text() == 'True') {
+        var url_template = '<a href="$1" target="_blank" class="text-muted">$1</a>'
+        $(".msg").each(function (i) {
+            var row = $(this).text().replace(url_patten, url_template);
+            $(this).text('')
+            $(this).append(row);
+        });
+    }
 
     //. socket.io
     if ($("#socketio").text() == 'True') {
@@ -27,6 +29,13 @@ $(function () {
             '<td width="15%"><a href="/channel/{channel}/{date}/{line}">{nick}</a></td>' +
             '<td width="75%" class="msg">{msg}</td></tr>';
 
+            if ($("#autolinks").text() == 'True') {
+                var msg = row["msg"].replace(url_patten, url_template);
+            }
+            else {
+                var msg = row["msg"];
+            }
+
             var epoch = row["time"] * 1000;
             str = str.assign({
                 time: Date.create(epoch).format('{HH}:{mm}:{ss}'),
@@ -34,7 +43,7 @@ $(function () {
                 date: Date.create(epoch).format('{yyyy}-{MM}-{dd}'),
                 line: line,
                 nick: row["nick"],
-                msg: row["msg"].replace(url_patten, url_template),
+                msg: msg,
             });
             $('#viewer').append(str);
 

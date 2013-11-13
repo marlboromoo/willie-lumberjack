@@ -3,6 +3,7 @@
         <div class="hidden" id="chname">{{channel}}</div>
         <div class="hidden" id="line">{{len(rows)}}</div>
         <div class="hidden" id="socketio">{{socketio}}</div>
+        <div class="hidden" id="autolinks">{{autolinks}}</div>
 
         <div class="row">
           <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
