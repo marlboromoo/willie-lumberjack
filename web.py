@@ -133,7 +133,7 @@ def set_theme(name):
 def get_theme():
     """Get the name of theme in cookie.
 
-    :name: theme's name
+    :returns: theme's name
 
     """
     return bottle.request.get_cookie('theme')
