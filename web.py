@@ -321,7 +321,7 @@ def autolinks(rdb, value):
 
     """
     set_autolinks(value)
-    bottle.redirect('/options')
+    bottle.redirect('/options/')
 
 @app.post('/go2date')
 def go2date(rdb):
