@@ -158,6 +158,28 @@ def is_autolinks():
     except Exception:
         return False
 
+
+def set_reverse(value):
+    """Set reverse to value in cookie.
+
+    :value: Ture or False
+
+    """
+    bottle.response.set_cookie('reverse', value, path='/')
+
+
+def is_reverse():
+    """Return True if reverse is True in cookie else False
+
+    :returns: True or False
+
+    """
+    try:
+        value = bottle.request.get_cookie('reverse')
+        return True if value.lower() in ['true', '1'] else False
+    except Exception:
+        return False
+
 ###############################################################################
 # Helper class
 ###############################################################################
@@ -235,6 +257,8 @@ def viewer(rdb, channel, date, slash):
         rows = []
         for i in get_logs(rdb, channel, date):
             rows.append(irc_row(i))
+        if is_reverse():
+            rows.reverse()
         return bottle.template('viewer',
                                channel=channel,
                                date=date,
@@ -242,6 +266,7 @@ def viewer(rdb, channel, date, slash):
                                rows=rows,
                                socketio=socketio,
                                autolinks=is_autolinks(),
+                               reverse=is_reverse(),
                               )
     else:
         bottle.redirect('/channel/%s/today/' % (channel))
@@ -282,11 +307,16 @@ def options(rdb, slash):
     autolinks = is_autolinks()
     autolinks_true_active = 'active' if autolinks else ''
     autolinks_false_active= 'active' if not autolinks else ''
+    reverse = is_reverse()
+    reverse_true_active = 'active' if reverse else ''
+    reverse_false_active= 'active' if not reverse else ''
     return bottle.template('options',
                            channels=get_channels(rdb),
                            themes = config.BOOTSWATCH_THEMES,
                            autolinks_true_active=autolinks_true_active,
                            autolinks_false_active=autolinks_false_active,
+                           reverse_true_active=reverse_true_active,
+                           reverse_false_active=reverse_false_active,
                           )
 
 @app.get('/archives/<channel>/<log>')
@@ -314,13 +344,24 @@ def themes(rdb, theme):
 
 @app.get('/options/autolinks/<value>')
 def autolinks(rdb, value):
-    """API to set the option autolinks.
+    """API to set the autolinks.
 
     :rdb: redis DB instance
     :value: True or False
 
     """
     set_autolinks(value)
+    bottle.redirect('/options/')
+
+@app.get('/options/reverse/<value>')
+def reverse(rdb, value):
+    """API to set the reverse option.
+
+    :rdb: redis DB instance
+    :value: True or False
+
+    """
+    set_reverse(value)
     bottle.redirect('/options/')
 
 @app.post('/go2date')

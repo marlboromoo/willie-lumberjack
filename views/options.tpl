@@ -23,6 +23,28 @@
               </div>
             </div>
           </div>
+          <div class="col-lg-4 col-sm-6">
+            <div class="thumbnail">
+              <br/>
+              <div class="image text-center">
+                <i class="glyphicon glyphicon-sort" style='font-size: 100px'></i>
+              </div>
+              <div class="caption text-center">
+                <h3>Reverse Order</h3>
+                <p>Reverse the IRC logs sorting order.<p>
+                <div class="btn-group btn-group">
+                  % if reverse_true_active:
+                    <a href="#" class="btn btn-info {{reverse_true_active}}">On</a>
+                    <a href="/options/reverse/False" class="btn btn-info {{reverse_false_active}}">Off</a>
+                  % else:
+                    <a href="/options/reverse/True" class="btn btn-info {{reverse_true_active}}">On</a>
+                    <a href="#" class="btn btn-info {{reverse_false_active}}">Off</a>
+                  % end
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
 
         <h2>

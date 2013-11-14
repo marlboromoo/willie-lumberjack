@@ -45,7 +45,13 @@ $(function () {
                 nick: row["nick"],
                 msg: msg,
             });
-            $('#viewer').append(str);
+
+            if ($("#reverse").text() == 'True') {
+                $('#viewer').prepend(str);
+            }
+            else {
+                $('#viewer').append(str);
+            }
 
             //. Notice on navbar
             if (Number($("#notice").text()) == 0) {
