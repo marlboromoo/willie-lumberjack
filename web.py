@@ -138,6 +138,19 @@ def get_theme():
     """
     return bottle.request.get_cookie('theme')
 
+def _is_what(what):
+    """Return True if waht is True in cookie else False
+
+    :what: key in cookie
+    :returns: True or False
+
+    """
+    try:
+        value = bottle.request.get_cookie(what)
+        return True if value.lower() in ['true', '1'] else False
+    except Exception:
+        return False
+
 def set_autolinks(value):
     """Set autolinks to value in cookie.
 
@@ -147,16 +160,12 @@ def set_autolinks(value):
     bottle.response.set_cookie('autolinks', value, path='/')
 
 def is_autolinks():
-    """Return True if autolinks is True in cookie else False
+    """Return if autolinks or not.
 
     :returns: True or False
 
     """
-    try:
-        value = bottle.request.get_cookie('autolinks')
-        return True if value.lower() in ['true', '1'] else False
-    except Exception:
-        return False
+    return _is_what('autolinks')
 
 
 def set_reverse(value):
@@ -169,16 +178,12 @@ def set_reverse(value):
 
 
 def is_reverse():
-    """Return True if reverse is True in cookie else False
+    """Check if reverse or not.
 
     :returns: True or False
 
     """
-    try:
-        value = bottle.request.get_cookie('reverse')
-        return True if value.lower() in ['true', '1'] else False
-    except Exception:
-        return False
+    return _is_what('reverse')
 
 ###############################################################################
 # Helper class
