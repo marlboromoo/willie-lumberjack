@@ -10,15 +10,15 @@
           <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
             <h2>#{{channel}} <small id="date">{{date}}</small></h2>
             <div class="table-responsive">
-              <table class="table">
+              <table class="table" style="table-layout: fixed; word-wrap: break-word;">
                 <tbody id="viewer">
                 % i = 0
                 % for row in rows:
                   % i += 1
                 <tr>
-                  <td width="10%">[{{row['time']}}]</td>
+                  <td width="15%" class="text-center">[{{row['time']}}]</td>
                   <td width="15%"><a href="/channel/{{channel}}/{{date}}/{{i}}">{{row['nick']}}</a></td>
-                  <td width="75%" class="msg">{{row['msg']}}</td>
+                  <td width="70%" class="msg">{{row['msg']}}</td>
                 </tr>
                 % end
                 % if len(rows) < 1:
