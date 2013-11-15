@@ -11,14 +11,19 @@
             <h2>#{{channel}} <small id="date">{{date}}</small></h2>
             <table class="table break">
               <tbody id="viewer">
-              % i = 0
+              % i, lines= 0, len(rows)
               % for row in rows:
                 % i += 1
               <tr>
                 <td>
                   <div class="row">
                     <div class="col-xs-12 col-sm-6 col-md-4">
-                      [{{row['time']}}] <a href="/channel/{{channel}}/{{date}}/{{i}}" class="pull-right">{{row['nick']}}</a>
+                      % if reverse:
+                      %   line = lines - i + 1
+                      % else:
+                      %   line = i
+                      % end
+                      [{{row['time']}}] <a href="/channel/{{channel}}/{{date}}/{{line}}" class="pull-right" target="_blank">{{row['nick']}}</a>
                     </div>
                     <div class="col-xs-12 col-sm-6 col-md-8 msg">
                       {{row['msg']}}
