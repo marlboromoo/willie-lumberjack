@@ -120,7 +120,15 @@ Check the [config.py] [] to see the full example.
  - `BOOTSWATCH_THEMES`: Themes to enable.
 
 ## Usage
-TODO.
+### Clean old logs
+If you want to keep the logs in 30 days only, you can add following line in 
+**/etc/crontab**.
+```
+
+#. keep log only 1 month
+01 01   * * *   root    find $PATH_TO_IRC_LOGS -ctime +30 | grep -i txt$ | xargs -i rm -f {}
+
+```
 
 ## TODO
  * You tell me
