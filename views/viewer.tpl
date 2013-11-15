@@ -61,8 +61,31 @@
               <span class="glyphicon glyphicon-hdd"></span>
               <label> Archive</label>
               <a href="/archives/{{channel}}/{{date}}.txt" class="list-group-item"><span class="glyphicon glyphicon-download-alt"></span> Download</a>
+              <br/>
+              <span class="glyphicon glyphicon-pushpin"></span>
+              <label> Widget</label>
+              <a href="#" class="list-group-item" data-toggle="modal" data-target="#widgetModal"><span class="glyphicon glyphicon-download-alt"></span> Get It</a>
               </div>
             </form>
+          </div>
+        </div>
+
+        <!-- Widget Modal -->
+        <div class="modal fade" id="widgetModal" tabindex="-1" role="dialog" aria-labelledby="widgetModelLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="widgetModelLabel">Get widget for #{{channel}}</h4>
+              </div>
+              <div class="modal-body">
+                <p>Insert the following html code on your web page ;)</p>
+                <pre>&lt;iframe height="480" frameborder="0" src="http://{{server}}/widget/{{channel}}/"&gt;&lt;/iframe&gt;</pre>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
           </div>
         </div>
 

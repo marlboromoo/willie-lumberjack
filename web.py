@@ -272,6 +272,7 @@ def viewer(rdb, channel, date, slash):
                                socketio=socketio,
                                autolinks=is_autolinks(),
                                reverse=is_reverse(),
+                               server=bottle.request.urlparts[1],
                               )
     else:
         bottle.redirect('/channel/%s/today/' % (channel))
@@ -300,6 +301,30 @@ def show_quote(rdb, channel, date, line):
                                row=row)
     else:
         bottle.redirect('/channel/%s/today/' % (channel))
+
+@app.get('/widget/<channel><slash:re:/*>')
+def widget(rdb, channel, slash):
+    """Widget view, date='today', socketio = autolinks = reverse = True.
+
+    :rdb: redis DB instance
+    :channel: IRC channel name without #
+
+    """
+    date = str_date('today')
+    rows = []
+    for i in get_logs(rdb, channel, date):
+        rows.append(irc_row(i))
+    rows.reverse()
+    return bottle.template('viewer',
+                           channel=channel,
+                           date=date,
+                           channels=get_channels(rdb),
+                           rows=rows,
+                           socketio=True,
+                           autolinks=True,
+                           reverse=True,
+                           server=bottle.request.urlparts[1],
+                          )
 
 @app.get('/options<slash:re:/*>')
 def options(rdb, slash):
