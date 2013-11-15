@@ -90,7 +90,7 @@
               </div>
               <div class="modal-body">
                 <p>Insert the following html code on your web page ;)</p>
-                <pre>&lt;iframe height="480" frameborder="0" src="http://{{server}}/widget/{{channel}}/"&gt;&lt;/iframe&gt;</pre>
+                <pre>&lt;iframe height="480" width="240" frameborder="0" src="http://{{server}}/widget/{{channel}}/"&gt;&lt;/iframe&gt;</pre>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
