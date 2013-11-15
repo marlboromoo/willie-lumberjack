@@ -207,7 +207,17 @@ willie -d
 </ul><h2>
 <a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
 
-<p>TODO.</p>
+<h3>
+<a name="clean-old-logs" class="anchor" href="#clean-old-logs"><span class="octicon octicon-link"></span></a>Clean old logs</h3>
+
+<p>If you want to keep the logs in 30 days only, you can add following line in 
+<strong>/etc/crontab</strong>.</p>
+
+<pre><code>
+#. keep log only 1 month
+01 01   * * *   root    find $PATH_TO_IRC_LOGS -ctime +30 | grep -i txt$ | xargs -i rm -f {}
+
+</code></pre>
 
 <h2>
 <a name="todo" class="anchor" href="#todo"><span class="octicon octicon-link"></span></a>TODO</h2>
