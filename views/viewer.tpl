@@ -14,7 +14,9 @@
 
         <div class="row">
           <div class="col-xs-12 col-sm-9">
+            % if not widget:
             <h2>#{{channel}} <small id="date">{{date}}</small></h2>
+            % end
             <table class="table {{striped}} {{condensed}} break">
               <tbody id="viewer">
               % i, lines= 0, len(rows)
