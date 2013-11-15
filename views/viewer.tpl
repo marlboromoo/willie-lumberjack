@@ -7,32 +7,37 @@
         <div class="hidden" id="reverse">{{reverse}}</div>
 
         <div class="row">
-          <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+          <div class="col-xs-12 col-sm-9">
             <h2>#{{channel}} <small id="date">{{date}}</small></h2>
-            <div class="table-responsive">
-              <table class="table" style="table-layout: fixed; word-wrap: break-word;">
-                <tbody id="viewer">
-                % i = 0
-                % for row in rows:
-                  % i += 1
-                <tr>
-                  <td width="15%" class="text-center">[{{row['time']}}]</td>
-                  <td width="15%"><a href="/channel/{{channel}}/{{date}}/{{i}}">{{row['nick']}}</a></td>
-                  <td width="70%" class="msg">{{row['msg']}}</td>
-                </tr>
-                % end
-                % if len(rows) < 1:
-                <tr id="trash">
-                  <td>Nothing here. Try <a href="/archives/{{channel}}/{{date}}.txt">Archive</a>.</td>
-                </tr>
-                % end
-                </tbody>
-              </table>
-            </div>
+            <table class="table break">
+              <tbody id="viewer">
+              % i = 0
+              % for row in rows:
+                % i += 1
+              <tr>
+                <td>
+                  <div class="row">
+                    <div class="col-xs-12 col-sm-6 col-md-4">
+                      [{{row['time']}}] <a href="/channel/{{channel}}/{{date}}/{{i}}" class="pull-right">{{row['nick']}}</a>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-8 msg">
+                      {{row['msg']}}
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              % end
+              % if len(rows) < 1:
+              <tr id="trash">
+                <td>Nothing here. Try <a href="/archives/{{channel}}/{{date}}.txt">Archive</a>.</td>
+              </tr>
+              % end
+              </tbody>
+            </table>
             <div id="down"></div>
           </div>
 
-          <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
+          <div class="col-xs-12 col-sm-3">
             <br/>
             <form class="form affix" role="form" method="post" action="/go2date">
               <div class="form-group">

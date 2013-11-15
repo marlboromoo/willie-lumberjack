@@ -3,7 +3,7 @@
 
         <h2>#{{channel}} <small>{{date}}</small></h2>
         % if row:
-        <div class="well">
+        <div class="well break">
           <p class="lead"><b>{{row['nick']}} &gt;</b> <span class="glyphicon glyphicon-comment pull-right"></span></p>
           <blockquote>
             <p>{{row['msg']}}</p>

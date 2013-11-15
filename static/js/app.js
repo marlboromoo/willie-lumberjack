@@ -25,9 +25,10 @@ $(function () {
             var line = Number($('#line').text()) + 1;
             $("#line").text(line);
 
-            var str = '<tr id="new{line}"><td width="15%" class="text-center">[{time}]</td>' + 
-            '<td width="15%"><a href="/channel/{channel}/{date}/{line}">{nick}</a></td>' +
-            '<td width="70%" class="msg">{msg}</td></tr>';
+            var str = '<tr id="new{line}"><td><div class="row">' +
+            '<div class="col-xs-12 col-sm-6 col-md-4">[{time}] <a href="/channel/{channel}/{date}/{line}" class="pull-right">{nick}</a></div>' +
+            '<div class="col-xs-12 col-sm-6 col-md-8 msg">{msg}</div>' +
+            '</div></td></tr>';
 
             if ($("#autolinks").text() == 'True') {
                 var msg = row["msg"].replace(url_patten, url_template);
