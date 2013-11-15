@@ -51,7 +51,7 @@
           </div>
 
           % if not widget:
-          <div class="col-xs-12 col-sm-3">
+          <div class="hidden-xs col-sm-3">
             <br/>
             <form class="form affix" role="form" method="post" action="/go2date">
               <div class="form-group">
