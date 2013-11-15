@@ -19,7 +19,7 @@ Willie-
 ## Features
  * Real-time log viewer
  * Themes ([Bootswatch] [])
- * ...
+ * Widget
 
 ## Requirments 
  - Python
@@ -123,7 +123,6 @@ Check the [config.py] [] to see the full example.
 TODO.
 
 ## TODO
- * Widget
  * You tell me
 
 ## Status
