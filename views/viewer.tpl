@@ -1,3 +1,9 @@
+% setdefault('widget', False)
+% setdefault('striped', '')
+% setdefault('condensed', '')
+% if widget:
+%   striped, condensed = 'table-striped', 'table-condensed'
+% end
 
         <div class="hidden" id="chkey">#{{channel}}:{{date}}</div>
         <div class="hidden" id="chname">{{channel}}</div>
@@ -9,7 +15,7 @@
         <div class="row">
           <div class="col-xs-12 col-sm-9">
             <h2>#{{channel}} <small id="date">{{date}}</small></h2>
-            <table class="table break">
+            <table class="table {{striped}} {{condensed}} break">
               <tbody id="viewer">
               % i, lines= 0, len(rows)
               % for row in rows:
@@ -23,10 +29,10 @@
                       % else:
                       %   line = i
                       % end
-                      [{{row['time']}}] <a href="/channel/{{channel}}/{{date}}/{{line}}" class="pull-right" target="_blank">{{row['nick']}}</a>
+                      <p class="text-warning">[{{row['time']}}] <a href="/channel/{{channel}}/{{date}}/{{line}}" class="pull-right" target="_blank">{{row['nick']}}</a></p>
                     </div>
                     <div class="col-xs-12 col-sm-6 col-md-8 msg">
-                      {{row['msg']}}
+                      <p>{{row['msg']}}</p>
                     </div>
                   </div>
                 </td>
@@ -34,7 +40,7 @@
               % end
               % if len(rows) < 1:
               <tr id="trash">
-                <td>Nothing here. Try <a href="/archives/{{channel}}/{{date}}.txt">Archive</a>.</td>
+                <td><p>Nothing here. Try <a href="/archives/{{channel}}/{{date}}.txt">Archive</a>.</p></td>
               </tr>
               % end
               </tbody>
@@ -42,6 +48,7 @@
             <div id="down"></div>
           </div>
 
+          % if not widget:
           <div class="col-xs-12 col-sm-3">
             <br/>
             <form class="form affix" role="form" method="post" action="/go2date">
@@ -60,7 +67,7 @@
               <br/>
               <span class="glyphicon glyphicon-hdd"></span>
               <label> Archive</label>
-              <a href="/archives/{{channel}}/{{date}}.txt" class="list-group-item"><span class="glyphicon glyphicon-download-alt"></span> Download</a>
+              <a href="/archives/{{channel}}/{{date}}.txt" class="list-group-item" target="_blank"><span class="glyphicon glyphicon-download-alt"></span> Download</a>
               <br/>
               <span class="glyphicon glyphicon-pushpin"></span>
               <label> Widget</label>
@@ -69,6 +76,7 @@
             </form>
           </div>
         </div>
+        % end
 
         <!-- Widget Modal -->
         <div class="modal fade" id="widgetModal" tabindex="-1" role="dialog" aria-labelledby="widgetModelLabel" aria-hidden="true">
@@ -89,4 +97,4 @@
           </div>
         </div>
 
-%rebase layout title=None, extra_title='', channel=channel, channels=channels, date=date, socketio=socketio
+%rebase layout title=None, extra_title='', channel=channel, channels=channels, date=date, socketio=socketio, widget=widget

@@ -324,6 +324,7 @@ def widget(rdb, channel, slash):
                            autolinks=True,
                            reverse=True,
                            server=bottle.request.urlparts[1],
+                           widget=True,
                           )
 
 @app.get('/options<slash:re:/*>')

@@ -26,8 +26,8 @@ $(function () {
             $("#line").text(line);
 
             var str = '<tr id="new{line}"><td><div class="row">' +
-            '<div class="col-xs-12 col-sm-6 col-md-4">[{time}] <a href="/channel/{channel}/{date}/{line}" class="pull-right" target="blnak">{nick}</a></div>' +
-            '<div class="col-xs-12 col-sm-6 col-md-8 msg">{msg}</div>' +
+            '<div class="col-xs-12 col-sm-6 col-md-4"><p class="text-warning">[{time}] <a href="/channel/{channel}/{date}/{line}" class="pull-right" target="blnak">{nick}</a></p></div>' +
+            '<div class="col-xs-12 col-sm-6 col-md-8 msg"><p>{msg}</p></div>' +
             '</div></td></tr>';
 
             if ($("#autolinks").text() == 'True') {

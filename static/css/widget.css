@@ -1,0 +1,17 @@
+/* Sticky footer styles
+-------------------------------------------------- */
+
+html,
+body {
+  height: 100%;
+}
+
+#wrap {
+  min-height: 100%;
+  height: auto;
+}
+
+.break {
+  table-layout: fixed;
+  word-wrap: break-word;
+}

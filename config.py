@@ -23,6 +23,8 @@ REDIS_DBID = 0
 LOG_PATH = '/tmp/lumberjack/'
 
 #. theme
+DEFAULT_THEME = 'readable'
+WIDGET_THEME= 'spacelab'
 BOOTSWATCH_THEMES = {
     #'amelia' : 'Sweet and cheery',
     'cerulean' : 'A calm, blue sky',

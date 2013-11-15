@@ -1,10 +1,12 @@
-% import bottle
+% from web import get_theme
 % import config
-% theme = bottle.request.get_cookie('theme')
-% theme = theme or 'readable'
-% project = config.PROJECT
+% setdefault('theme', config.DEFAULT_THEME)
 % setdefault('socketio', False)
 % setdefault('channel', None)
+% setdefault('widget', False)
+% theme = config.WIDGET_THEME if widget else get_theme()
+% theme = theme if theme else config.DEFAULT_THEME
+% project = config.PROJECT
 
 <!DOCTYPE html>
 <html lang="en">
@@ -26,7 +28,11 @@
     <link href="/_static/bootswatch/{{theme}}/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="/_static/css/app.css" rel="stylesheet">
+    % if widget:
+      <link href="/_static/css/widget.css" rel="stylesheet">
+    %  else:
+      <link href="/_static/css/app.css" rel="stylesheet">
+    % end
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -41,6 +47,7 @@
     <div id="wrap">
 
       <!-- Fixed navbar -->
+      % if not widget:
       <div class="navbar navbar-default navbar-fixed-top">
         <div class="container">
           <div class="navbar-header">
@@ -82,6 +89,7 @@
           </div><!--/.nav-collapse -->
         </div>
       </div>
+      % end
 
 
       <div class="container">
@@ -90,12 +98,14 @@
     <!-- /.container -->
     </div>
 
+    % if not widget:
     <div id="footer">
       <div class="container">
         <p class="text-muted credit pull-right">
           {{project}} 2013 / <a href="https://github.com/marlboromoo/willie-lumberjack" target="_blank">GitHub</a> / Build with <span class="glyphicon glyphicon-heart"></p>
       </div>
     </div>
+    % end
 
     <!-- Load JS here for greater good =============================-->
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
