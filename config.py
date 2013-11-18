@@ -39,3 +39,6 @@ BOOTSWATCH_THEMES = {
     'united': 'Ubuntu orange and unique font',
 }
 
+#. google analytics
+GA_ID = 'UA-45811881-1'
+GA_ACCOUNT = 'ultrab0t.net'
