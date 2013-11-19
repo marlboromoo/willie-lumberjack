@@ -60,31 +60,31 @@ python web.py start
 ##  Update
  1. Stop the ircbot & web server.
 
-```sh
-#. stop the web server
-cd ~/.willie-lumberjack
-python web.py stop
-#. stop the ircbot
-willie -q
-```
+ ```sh
+ #. stop the web server
+ cd ~/.willie-lumberjack
+ python web.py stop
+ #. stop the ircbot
+ willie -q
+ ```
 
  2. Update.
 
-```sh
-cd ~/willie-lumberjack
-git pull
-git submodule update
-```
+ ```sh
+ cd ~/willie-lumberjack
+ git pull
+ git submodule update
+ ```
 
  3. Start the ircbot & web server.
 
-```sh
-#. start the web server
-cd ~/.willie-lumberjack
-python web.py start
-#. start the ircbot
-willie -d
-```
+ ```sh
+ #. start the web server
+ cd ~/.willie-lumberjack
+ python web.py start
+ #. start the ircbot
+ willie -d
+ ```
 
 ## Configuration
 
