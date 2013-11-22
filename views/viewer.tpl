@@ -13,7 +13,11 @@
         <div class="hidden" id="reverse">{{reverse}}</div>
 
         <div class="row">
+          % if widget:
+          <div class="col-xs-12">
+          % else:
           <div class="col-xs-12 col-sm-9">
+          % end
             % if not widget:
             <h2>#{{channel}} <small id="date">{{date}}</small></h2>
             % end
