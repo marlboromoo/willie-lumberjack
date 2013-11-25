@@ -39,7 +39,7 @@ Willie-
 sudo apt-get install python python-dev python-pip redis-server \
 build-essential libevent-dev
 ```
-### Wilie-Lumberjack
+### Willie-Lumberjack
 ```sh
 cd ~
 git clone https://github.com/marlboromoo/willie-lumberjack.git
@@ -117,6 +117,8 @@ Check the [config.py] [] to see the full example.
  - `LOG_PATH`: Path to the plain text log.
 
 #### Theme
+ - `DEFAULT_THEME`: Default theme.
+ - `WIDGET_THEME`: Default theme for widget.
  - `BOOTSWATCH_THEMES`: Themes to enable.
 
 ## Usage
