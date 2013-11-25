@@ -5,7 +5,7 @@ services:
   - redis-server
 before_install:
   - sudo apt-get update
-  - sudo apt-get install python python-dev python-pip redis-server build-essential libevent-dev
+  - sudo apt-get install -y python python-dev python-pip redis-server build-essential libevent-dev
 install:
   - pip install -r requirements.txt #--use-mirrors
 before_script: 
