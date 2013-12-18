@@ -5,7 +5,7 @@ services:
   - redis-server
 before_install:
   - sudo apt-get update
-  - sudo apt-get install -y -o Dpkg::Options::=--force-confnew python python-dev python-pip redis-server build-essential libevent-dev
+  - sudo apt-get install -y -o Dpkg::Options::=--force-confnew python python-dev python-pip redis-server build-essential libevent-dev ircd-irc2
 install:
   - pip install -r requirements.txt #--use-mirrors
 before_script: 
@@ -15,6 +15,7 @@ before_script:
   - ls -l ~/.willie/modules/lumberjack.py
   - ln -s $(pwd)/doc/logbot.cfg ~/.willie/default.cfg
   - ls -l ~/.willie/default.cfg
+  - sed -i 's/^host =.*/host = 127.0.0.1/g' ~/.willie/default.cfg
   - sed -i 's/redis_host =.*/redis_host = 127.0.0.1/g' ~/.willie/default.cfg
   - sed -i "s/REDIS_HOST =.*/REDIS_HOST = '127.0.0.1'/g" config.py
 script: willie -d && python web.py start && python web.py stop && willie -q
