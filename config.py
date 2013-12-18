@@ -23,7 +23,7 @@ REDIS_DBID = 0
 LOG_PATH = '/tmp/lumberjack/'
 
 #. theme
-DEFAULT_THEME = 'readable'
+DEFAULT_THEME = 'yeti'
 WIDGET_THEME= 'spacelab'
 BOOTSWATCH_THEMES = {
     #'amelia' : 'Sweet and cheery',
@@ -37,6 +37,7 @@ BOOTSWATCH_THEMES = {
     #'slate' : 'Shades of gunmetal gray',
     'spacelab' : 'Silvery and sleek',
     'united': 'Ubuntu orange and unique font',
+    'yeti': 'A friendly foundation',
 }
 
 #. google analytics
