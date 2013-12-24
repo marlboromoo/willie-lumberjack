@@ -26,15 +26,15 @@ LOG_PATH = '/tmp/lumberjack/'
 DEFAULT_THEME = 'yeti'
 WIDGET_THEME= 'spacelab'
 BOOTSWATCH_THEMES = {
-    #'amelia' : 'Sweet and cheery',
+    'amelia' : 'Sweet and cheery',
     'cerulean' : 'A calm, blue sky',
-    #'cosmo' : 'An ode to Metro',
-    #'cyborg' : 'Jet black and electric blue',
+    'cosmo' : 'An ode to Metro',
+    'cyborg' : 'Jet black and electric blue',
     'flatly' : 'Flat and modern',
     'journal' : 'Crisp like a new sheet of paper',
     'readable' : 'Optimized for legibility',
     'simplex' : 'Mini and minimalist',
-    #'slate' : 'Shades of gunmetal gray',
+    'slate' : 'Shades of gunmetal gray',
     'spacelab' : 'Silvery and sleek',
     'united': 'Ubuntu orange and unique font',
     'yeti': 'A friendly foundation',
