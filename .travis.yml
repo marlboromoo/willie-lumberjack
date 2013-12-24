@@ -10,16 +10,11 @@ install:
   - pip install -r requirements.txt #--use-mirrors
 before_script: 
   - mkdir -p ~/.willie/modules
-  - ls -ld ~/.willie/modules
   - ln -s $(pwd)/lumberjack.py ~/.willie/modules/
-  - ls -l ~/.willie/modules/lumberjack.py
   - ln -s $(pwd)/doc/logbot.cfg ~/.willie/default.cfg
-  - ls -l ~/.willie/default.cfg
   - sed -i 's/^host =.*/host = 127.0.0.1/g' ~/.willie/default.cfg
   - sed -i 's/redis_host =.*/redis_host = 127.0.0.1/g' ~/.willie/default.cfg
   - sed -i "s/REDIS_HOST =.*/REDIS_HOST = '127.0.0.1'/g" config.py
-  - netstat -tunlp | grep -i 6379
 script: willie -d && python web.py start && python web.py stop && willie -q
 after_script: 
-  - ls -l /tmp/web.log
   - cat /tmp/web.log
